@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Figma-to-Claude Code Pipeline &mdash; Training Guides</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a1628;
+      --bg-card: #101d36;
+      --bg-card-hover: #152444;
+      --primary-dark: #10264D;
+      --primary-light: #1a3a6b;
+      --accent-blue: #2563eb;
+      --accent-orange: #F97316;
+      --accent-purple: #A78BFA;
+      --accent-red: #EF4444;
+      --accent-green: #10B981;
+      --accent-cyan: #06B6D4;
+      --text-primary: #e2e8f0;
+      --text-secondary: #b0bec5;
+      --text-muted: #8896a6;
+      --border: rgba(255,255,255,0.06);
+      --border-accent: rgba(37,99,235,0.25);
+      --radius-card: 12px;
+      --radius-btn: 8px;
+      --radius-pill: 20px;
+      --shadow-card: 0 2px 8px rgba(0,0,0,0.25);
+      --shadow-hover: 0 8px 24px rgba(0,0,0,0.4);
+      --transition: all 0.2s ease;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--primary-light); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-blue); }
+    html { scrollbar-width: thin; scrollbar-color: var(--primary-light) var(--bg); scroll-behavior: smooth; }
+    body {
+      font-family: 'Barlow', sans-serif;
+      color: var(--text-primary);
+      background: var(--bg);
+      line-height: 1.65;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== HEADER ===== */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(10,22,40,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(37,99,235,0.08);
+      padding: 0 1.5rem;
+    }
+    .header-inner {
+      max-width: 1120px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 56px;
+    }
+    .logo { display: flex; align-items: baseline; gap: 0.5rem; }
+    .logo-brand {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.1rem;
+      color: var(--accent-blue); text-transform: uppercase; letter-spacing: 3px;
+    }
+    .logo-sub {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 500; font-size: 0.75rem;
+      color: #fff; text-transform: uppercase; letter-spacing: 2px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: var(--bg); color: #fff; position: relative; overflow: hidden; margin-top: 56px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(37,99,235,0.2) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(37,99,235,0.08) 0%, transparent 50%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-content {
+      position: relative; z-index: 1; max-width: 800px; margin: 0 auto;
+      padding: 5rem 2rem 4rem; text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.4rem 1rem; background: rgba(37,99,235,0.15);
+      border: 1px solid var(--border-accent); border-radius: var(--radius-pill);
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; font-weight: 600;
+      color: var(--accent-blue); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Barlow Condensed', sans-serif; font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 800; letter-spacing: 2px; text-transform: uppercase; line-height: 1.15; margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--accent-blue); }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem); color: var(--text-secondary);
+      max-width: 620px; margin: 0 auto 2rem; line-height: 1.7;
+    }
+    .hero-meta { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .hero-meta-item {
+      display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--text-muted);
+    }
+    .hero-meta-item svg { width: 16px; height: 16px; color: var(--accent-blue); flex-shrink: 0; }
+    .hero-accent {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, rgba(37,99,235,0.6), rgba(37,99,235,0.0));
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: sticky; top: 56px; z-index: 100;
+      background: rgba(10,22,40,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(37,99,235,0.08);
+    }
+    .nav-inner {
+      max-width: 1120px; margin: 0 auto; display: flex; overflow-x: auto;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav a {
+      display: flex; align-items: center; gap: 0.4rem; padding: 0.85rem 1.1rem;
+      text-decoration: none; color: var(--text-muted);
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; font-weight: 600;
+      white-space: nowrap; letter-spacing: 2px; text-transform: uppercase;
+      border-bottom: 2px solid transparent; transition: var(--transition);
+    }
+    .nav a:hover { color: var(--text-primary); }
+    .nav a.active { color: var(--accent-blue); border-bottom-color: var(--accent-blue); }
+    .nav a svg { width: 14px; height: 14px; }
+
+    /* ===== LAYOUT ===== */
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 3.5rem 0; }
+    .divider { height: 1px; background: linear-gradient(to right, rgba(46,117,247,0.3), rgba(46,117,247,0.0)); }
+
+    /* ===== SECTION HEADERS ===== */
+    .section-header { margin-bottom: 2rem; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--accent-blue);
+      margin-bottom: 0.5rem; padding: 3px 10px;
+      background: rgba(37,99,235,0.15); border-radius: var(--radius-pill);
+    }
+    .section-label svg { width: 14px; height: 14px; }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.6rem; font-weight: 700;
+      color: var(--text-primary); letter-spacing: 2px; text-transform: uppercase; line-height: 1.25;
+    }
+    .section-desc { color: var(--text-secondary); margin-top: 0.5rem; font-size: 0.95rem; max-width: 700px; }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-card); box-shadow: var(--shadow-card); transition: var(--transition);
+    }
+    .card:hover { box-shadow: var(--shadow-hover); }
+    .card-body { padding: 1.5rem; }
+
+    /* ===== ASSIGNED-TO BADGES ===== */
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0.7rem;
+      border-radius: var(--radius-pill); font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    }
+    .badge-mayo { background: rgba(167,139,250,0.15); color: var(--accent-purple); border: 1px solid rgba(167,139,250,0.3); }
+    .badge-jorge { background: rgba(249,115,22,0.15); color: var(--accent-orange); border: 1px solid rgba(249,115,22,0.3); }
+    .badge-both { background: rgba(6,182,212,0.15); color: var(--accent-cyan); border: 1px solid rgba(6,182,212,0.3); }
+    .badge-priority { background: rgba(239,68,68,0.15); color: var(--accent-red); border: 1px solid rgba(239,68,68,0.3); }
+
+    /* ===== GUIDE CARDS (hub) ===== */
+    .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    .hub-tile {
+      display: flex; flex-direction: column; text-decoration: none; color: inherit;
+      overflow: hidden; position: relative; border-top: 4px solid var(--accent-blue); cursor: pointer;
+    }
+    .hub-tile.tile-purple { border-top-color: var(--accent-purple); }
+    .hub-tile.tile-orange { border-top-color: var(--accent-orange); }
+    .hub-tile.tile-cyan { border-top-color: var(--accent-cyan); }
+    .hub-tile.tile-green { border-top-color: var(--accent-green); }
+    .hub-tile.tile-red { border-top-color: var(--accent-red); }
+    .hub-tile-body {
+      padding: 1.75rem; display: flex; flex-direction: column; flex: 1; gap: 0.75rem;
+    }
+    .hub-tile-num {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; font-weight: 700;
+      color: var(--accent-blue); letter-spacing: 3px; text-transform: uppercase;
+    }
+    .hub-tile.tile-purple .hub-tile-num { color: var(--accent-purple); }
+    .hub-tile.tile-orange .hub-tile-num { color: var(--accent-orange); }
+    .hub-tile.tile-cyan .hub-tile-num { color: var(--accent-cyan); }
+    .hub-tile.tile-green .hub-tile-num { color: var(--accent-green); }
+    .hub-tile.tile-red .hub-tile-num { color: var(--accent-red); }
+    .hub-tile h3 {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.25rem; font-weight: 800;
+      color: var(--text-primary); letter-spacing: 1px; text-transform: uppercase; line-height: 1.2;
+    }
+    .hub-tile p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.55; }
+    .hub-tile-meta {
+      display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: auto; padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .hub-tile-cta {
+      display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.5rem;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; font-weight: 700;
+      color: var(--accent-blue); letter-spacing: 2px; text-transform: uppercase;
+    }
+    .hub-tile.tile-purple .hub-tile-cta { color: var(--accent-purple); }
+    .hub-tile.tile-orange .hub-tile-cta { color: var(--accent-orange); }
+    .hub-tile.tile-cyan .hub-tile-cta { color: var(--accent-cyan); }
+    .hub-tile.tile-green .hub-tile-cta { color: var(--accent-green); }
+    .hub-tile.tile-red .hub-tile-cta { color: var(--accent-red); }
+    .hub-tile-cta svg { width: 14px; height: 14px; transition: transform 0.2s ease; }
+    .hub-tile:hover .hub-tile-cta svg { transform: translateX(4px); }
+
+    /* ===== CONTENT BLOCKS ===== */
+    .content-block { margin-bottom: 1.5rem; }
+    .content-block:hover { transform: none; }
+    .content-block .card-body { padding: 1.75rem 2rem; }
+    .content-block h3 {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 1rem; display: flex; align-items: center;
+      gap: 0.6rem; letter-spacing: 2px; text-transform: uppercase;
+    }
+    .content-block h3::before {
+      content: ''; width: 3px; height: 1.1em;
+      background: var(--accent-blue); border-radius: 2px; flex-shrink: 0;
+    }
+    .content-block p, .content-block li {
+      font-size: 0.92rem; line-height: 1.7; color: var(--text-secondary);
+    }
+    .content-block p { margin-bottom: 0.75rem; }
+    .content-block ul { list-style: none; padding: 0; }
+    .content-block li {
+      padding: 0.4rem 0 0.4rem 1.5rem; position: relative;
+    }
+    .content-block li::before {
+      content: ''; position: absolute; left: 0; top: 0.85rem;
+      width: 5px; height: 5px; border-radius: 50%; background: var(--text-muted);
+    }
+    .content-block li strong { color: var(--text-primary); font-weight: 600; }
+
+    /* ===== RENAME TABLE ===== */
+    .rename-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .rename-table th {
+      padding: 0.6rem 1rem; font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem;
+      font-weight: 600; color: var(--text-muted); text-align: left; text-transform: uppercase;
+      letter-spacing: 2px; background: var(--primary-dark); border-bottom: 1px solid var(--border);
+    }
+    .rename-table td {
+      padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); font-size: 0.88rem;
+    }
+    .rename-table tr:hover td { background: var(--bg-card-hover); }
+    .rename-table .old-name {
+      color: var(--accent-red); font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600; letter-spacing: 0.5px;
+    }
+    .rename-table .what-is { color: var(--text-muted); font-size: 0.82rem; }
+    .rename-table .new-name {
+      color: var(--accent-green); font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; letter-spacing: 0.5px;
+    }
+
+    /* ===== CODE BLOCKS ===== */
+    .code-block {
+      background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: var(--radius-btn);
+      padding: 1rem 1.25rem; margin: 1rem 0; font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.82rem; line-height: 1.6; color: var(--text-secondary); overflow-x: auto;
+      white-space: pre;
+    }
+    .code-block .good { color: var(--accent-green); }
+    .code-block .bad { color: var(--accent-red); }
+    .code-block .dim { color: var(--text-muted); }
+
+    /* ===== COMPONENT INVENTORY ===== */
+    .inventory-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.78rem; }
+    .inventory-table th {
+      padding: 0.5rem 0.4rem; font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600; color: var(--text-muted); text-align: center;
+      text-transform: uppercase; letter-spacing: 1px; background: var(--primary-dark);
+      border-bottom: 1px solid var(--border); font-size: 0.65rem;
+    }
+    .inventory-table th:first-child { text-align: left; padding-left: 1rem; font-size: 0.7rem; }
+    .inventory-table td {
+      padding: 0.45rem 0.4rem; border-bottom: 1px solid var(--border); text-align: center;
+      color: var(--text-muted);
+    }
+    .inventory-table td:first-child {
+      text-align: left; padding-left: 1rem; color: var(--text-primary);
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.5px;
+    }
+    .inventory-table tr:hover td { background: var(--bg-card-hover); }
+    .inventory-table .dot { color: var(--accent-blue); font-weight: 700; font-size: 1rem; }
+
+    /* ===== HEAT MAP TABLE ===== */
+    .heat-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .heat-table th {
+      padding: 0.6rem 1rem; font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem;
+      font-weight: 600; color: var(--text-muted); text-align: left; text-transform: uppercase;
+      letter-spacing: 2px; background: var(--primary-dark); border-bottom: 1px solid var(--border);
+    }
+    .heat-table td {
+      padding: 0.55rem 1rem; border-bottom: 1px solid var(--border); font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+    .heat-table tr:hover td { background: var(--bg-card-hover); }
+    .heat-table .num { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--accent-blue); }
+    .heat-table .num-green { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--accent-green); }
+    .heat-table .num-orange { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--accent-orange); }
+
+    /* ===== PRIORITY LIST ===== */
+    .priority-list { list-style: none; padding: 0; counter-reset: pri; }
+    .priority-list li {
+      counter-increment: pri; display: flex; align-items: flex-start; gap: 0.85rem;
+      padding: 0.85rem 1.25rem; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-btn); margin-bottom: 0.5rem; transition: var(--transition);
+    }
+    .priority-list li:hover { border-color: var(--border-accent); background: var(--bg-card-hover); }
+    .priority-list .pri-num {
+      width: 28px; height: 28px; border-radius: 8px; background: var(--accent-blue); color: #fff;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 700;
+    }
+    .priority-list .pri-num::before { content: counter(pri); }
+    .priority-list .pri-text { font-size: 0.9rem; color: var(--text-secondary); }
+    .priority-list .pri-text strong { color: var(--text-primary); }
+    .priority-list .pri-ref {
+      font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;
+    }
+
+    /* ===== STEP BLOCKS ===== */
+    .steps { counter-reset: step; }
+    .step {
+      counter-increment: step; display: flex; gap: 1rem; padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      width: 32px; height: 32px; border-radius: 10px; background: var(--primary-dark);
+      border: 1px solid var(--border-accent); color: var(--accent-blue);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; font-weight: 800;
+    }
+    .step-num::before { content: counter(step); }
+    .step-body { flex: 1; }
+    .step-body h4 {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.95rem; font-weight: 700;
+      color: var(--text-primary); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.3rem;
+    }
+    .step-body p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
+
+    /* ===== VARIANT TABLE ===== */
+    .variant-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .variant-table th {
+      padding: 0.6rem 1rem; font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem;
+      font-weight: 600; color: var(--text-muted); text-align: left; text-transform: uppercase;
+      letter-spacing: 2px; background: var(--primary-dark); border-bottom: 1px solid var(--border);
+    }
+    .variant-table td {
+      padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+    .variant-table tr:hover td { background: var(--bg-card-hover); }
+    .variant-table .prop { color: var(--accent-cyan); font-weight: 600; }
+    .variant-table .val { color: var(--accent-green); }
+
+    /* ===== CALLOUT ===== */
+    .callout {
+      padding: 1rem 1.25rem; border-radius: var(--radius-btn); margin: 1rem 0;
+      border-left: 3px solid var(--accent-blue); background: rgba(37,99,235,0.08);
+      font-size: 0.88rem; color: var(--text-secondary);
+    }
+    .callout strong { color: var(--text-primary); }
+    .callout.callout-green { border-left-color: var(--accent-green); background: rgba(16,185,129,0.08); }
+    .callout.callout-red { border-left-color: var(--accent-red); background: rgba(239,68,68,0.08); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--primary-dark); border-top: 1px solid rgba(37,99,235,0.08);
+      padding: 2.5rem 1.5rem; text-align: center;
+    }
+    .footer-brand {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.9rem;
+      color: var(--accent-blue); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 0.5rem;
+    }
+    footer p { color: var(--text-muted); font-size: 0.82rem; line-height: 1.7; }
+
+    /* ===== ANIMATIONS ===== */
+    .animate-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .animate-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 700px) {
+      .hub-grid { grid-template-columns: 1fr; }
+      .inventory-table { font-size: 0.65rem; }
+      .inventory-table th, .inventory-table td { padding: 0.3rem 0.2rem; }
+      .rename-table { font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== FIXED HEADER ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-brand">Mileage Design</span>
+      <span class="logo-sub">Pipeline Training</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      Matthew Laprade Racing &mdash; Build Pipeline
+    </div>
+    <h1>Figma-to-Claude Code<br><span>Pipeline Training</span></h1>
+    <p class="hero-sub">Six guides for preparing Figma files so Claude Code can build them automatically. Every example uses the actual Matthew Laprade Racing design file.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+        6 Guides
+      </div>
+      <div class="hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        ~6 Hours Total
+      </div>
+      <div class="hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        Mayo &amp; Jorge
+      </div>
+    </div>
+  </div>
+  <div class="hero-accent"></div>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#overview">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Overview
+    </a>
+    <a href="#guide-1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      1. Rename
+    </a>
+    <a href="#guide-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      2. Components
+    </a>
+    <a href="#guide-3">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+      3. Variants
+    </a>
+    <a href="#guide-4">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17" cy="15.5" r="2.5"/><circle cx="8.5" cy="15.5" r="2.5"/></svg>
+      4. Tokens
+    </a>
+    <a href="#guide-5">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+      5. Inventory
+    </a>
+    <a href="#guide-6">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+      6. Cleanup
+    </a>
+    <a href="#schedule">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Schedule
+    </a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ===== OVERVIEW ===== -->
+<section id="overview" class="animate-in">
+  <div class="section-header">
+    <div class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      Why This Matters
+    </div>
+    <h2 class="section-title">The Problem We're Solving</h2>
+    <p class="section-desc">When Claude Code reads a Figma file to build a website, it needs three things: descriptive layer names, reusable components, and defined design tokens. The Matthew file is missing all three.</p>
+  </div>
+
+  <div class="hub-grid">
+    <div class="card hub-tile tile-red" onclick="document.getElementById('guide-1').scrollIntoView({behavior:'smooth'})">
+      <div class="hub-tile-body">
+        <div class="hub-tile-num">Guide 01 &mdash; Highest Impact</div>
+        <h3>Rename Every Layer</h3>
+        <p>Almost every section is named "Frame 491", "Frame 602", etc. Claude Code can't generate meaningful component filenames from auto-generated names.</p>
+        <div class="hub-tile-meta">
+          <span class="badge badge-mayo">Mayo</span>
+          <span class="badge badge-priority">Start Here</span>
+        </div>
+        <div class="hub-tile-cta">
+          Jump to Guide
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card hub-tile tile-purple" onclick="document.getElementById('guide-2').scrollIntoView({behavior:'smooth'})">
+      <div class="hub-tile-body">
+        <div class="hub-tile-num">Guide 02 &mdash; Reusability</div>
+        <h3>Create Section Components</h3>
+        <p>Only the footer, navbar, and buttons are actual Figma components. Every other repeated section is a copy-pasted frame &mdash; no shared updates, no variant support.</p>
+        <div class="hub-tile-meta">
+          <span class="badge badge-mayo">Mayo</span>
+        </div>
+        <div class="hub-tile-cta">
+          Jump to Guide
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card hub-tile" onclick="document.getElementById('guide-3').scrollIntoView({behavior:'smooth'})">
+      <div class="hub-tile-body">
+        <div class="hub-tile-num">Guide 03 &mdash; Automation</div>
+        <h3>Add Variants &amp; Properties</h3>
+        <p>Variants let Claude Code generate a single component file with conditional logic instead of separate files for each version. One hero component, four looks.</p>
+        <div class="hub-tile-meta">
+          <span class="badge badge-mayo">Mayo</span>
+        </div>
+        <div class="hub-tile-cta">
+          Jump to Guide
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card hub-tile tile-green" onclick="document.getElementById('guide-4').scrollIntoView({behavior:'smooth'})">
+      <div class="hub-tile-body">
+        <div class="hub-tile-num">Guide 04 &mdash; Quick Win</div>
+        <h3>Set Up Design Tokens</h3>
+        <p>No Figma Variables are defined &mdash; colors and typography are applied directly. Claude Code's token extraction returns empty. 30 minutes to fix.</p>
+        <div class="hub-tile-meta">
+          <span class="badge badge-mayo">Mayo</span>
+        </div>
+        <div class="hub-tile-cta">
+          Jump to Guide
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card hub-tile tile-orange" onclick="document.getElementById('guide-5').scrollIntoView({behavior:'smooth'})">
+      <div class="hub-tile-body">
+        <div class="hub-tile-num">Guide 05 &mdash; Build Reference</div>
+        <h3>Component Inventory</h3>
+        <p>The full 27-component heat map across all 14 pages. Shows build order, reuse percentages, and that homepage + division pages = 70% coverage.</p>
+        <div class="hub-tile-meta">
+          <span class="badge badge-jorge">Jorge</span>
+        </div>
+        <div class="hub-tile-cta">
+          Jump to Guide
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card hub-tile tile-cyan" onclick="document.getElementById('guide-6').scrollIntoView({behavior:'smooth'})">
+      <div class="hub-tile-body">
+        <div class="hub-tile-num">Guide 06 &mdash; Housekeeping</div>
+        <h3>Clean Up Duplicates</h3>
+        <p>Three sets of duplicate pages need to be resolved before the build &mdash; two "Late Model Stock Car" pages, two "Racing Overview" pages, two "FAQ" pages.</p>
+        <div class="hub-tile-meta">
+          <span class="badge badge-mayo">Mayo</span>
+        </div>
+        <div class="hub-tile-cta">
+          Jump to Guide
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== GUIDE 1: RENAME ===== -->
+<section id="guide-1" class="animate-in">
+  <div class="section-header">
+    <div class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Guide 01 &mdash; Assigned to Mayo
+    </div>
+    <h2 class="section-title">Rename Every Layer</h2>
+    <p class="section-desc">Almost every section in the Matthew file uses Figma's auto-generated names. The same name "Frame 602" appears on 9 different pages meaning something different each time. Claude Code cannot generate meaningful component filenames from these.</p>
+  </div>
+
+  <div class="callout callout-red">
+    <strong>Start with the Homepage.</strong> Jorge begins the homepage build Monday &mdash; renamed Homepage layers are the #1 priority.
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Naming Convention</h3>
+      <p>Use this pattern: <strong style="color:var(--accent-green)">[section-purpose]-[variant]</strong></p>
+      <p>All lowercase, hyphens between words. No spaces. No "Frame" or "Group" in the name.</p>
+      <p>You already did this correctly for three things &mdash; and it's exactly why they work well in the pipeline:</p>
+      <ul>
+        <li><strong>Main Nav Bar</strong> &mdash; clear, descriptive, used as an instance across every page</li>
+        <li><strong>Footer Component</strong> &mdash; same pattern</li>
+        <li><strong>Button Component - Red Filled Default</strong> &mdash; describes what it is AND its variant state</li>
+      </ul>
+      <p>Apply this same thinking to every section on every page.</p>
+    </div>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Homepage Rename Map</h3>
+      <table class="rename-table">
+        <thead><tr><th>Current Name</th><th>What It Is</th><th>Rename To</th></tr></thead>
+        <tbody>
+          <tr><td class="old-name">Frame 491</td><td class="what-is">Hero section with Matthew's name + video background</td><td class="new-name">hero-home</td></tr>
+          <tr><td class="old-name">Group 470</td><td class="what-is">Navigation bar area</td><td class="new-name">navbar-wrapper</td></tr>
+          <tr><td class="old-name">Frame 604</td><td class="what-is">"14 years old, four divisions" stats section</td><td class="new-name">stats-banner</td></tr>
+          <tr><td class="old-name">Frame 602</td><td class="what-is">Four divisions carousel (Pro Truck, LMSC, etc.)</td><td class="new-name">divisions-carousel</td></tr>
+          <tr><td class="old-name">Frame 605</td><td class="what-is">"Latest Results & Recaps" section</td><td class="new-name">results-recaps</td></tr>
+          <tr><td class="old-name">Frame 596</td><td class="what-is">"Meet Matthew" bio section with photo carousel</td><td class="new-name">meet-matthew</td></tr>
+          <tr><td class="old-name">Group 483</td><td class="what-is">"Get the Gear" merch section</td><td class="new-name">merch-gear</td></tr>
+          <tr><td class="old-name">Frame 595</td><td class="what-is">"From the Track" social feed</td><td class="new-name">social-feed</td></tr>
+          <tr><td class="old-name">Frame 594</td><td class="what-is">"Racing for a Cause" charity section</td><td class="new-name">charity-section</td></tr>
+          <tr><td class="old-name">Frame 597</td><td class="what-is">"Our Sponsors" logo row</td><td class="new-name">sponsors-row</td></tr>
+          <tr><td class="old-name">Frame 601</td><td class="what-is">"Upcoming Races" schedule preview</td><td class="new-name">upcoming-races</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>About Page Rename Map</h3>
+      <table class="rename-table">
+        <thead><tr><th>Current Name</th><th>What It Is</th><th>Rename To</th></tr></thead>
+        <tbody>
+          <tr><td class="old-name">Frame 491</td><td class="what-is">Hero &mdash; "About Matthew"</td><td class="new-name">hero-about</td></tr>
+          <tr><td class="old-name">Frame 596</td><td class="what-is">"Meet Matthew Laprade" bio block</td><td class="new-name">bio-intro</td></tr>
+          <tr><td class="old-name">Frame 606</td><td class="what-is">"Matthew's Story" narrative</td><td class="new-name">story-narrative</td></tr>
+          <tr><td class="old-name">Frame 605</td><td class="what-is">"Career Highlights" list</td><td class="new-name">career-highlights</td></tr>
+          <tr><td class="old-name">Frame 602</td><td class="what-is">"2026 Season" summary</td><td class="new-name">season-current</td></tr>
+          <tr><td class="old-name">Frame 607</td><td class="what-is">"Matthew's Teams" with logos</td><td class="new-name">teams-list</td></tr>
+          <tr><td class="old-name">Frame 608</td><td class="what-is">"Off the Track" personal section</td><td class="new-name">off-track</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Division Pages Rename Map</h3>
+      <p>Pro Truck, Modified, and LMSC share the same section structure:</p>
+      <table class="rename-table">
+        <thead><tr><th>Current Name</th><th>What It Is</th><th>Rename To</th></tr></thead>
+        <tbody>
+          <tr><td class="old-name">Group 470</td><td class="what-is">Navbar wrapper</td><td class="new-name">navbar-wrapper</td></tr>
+          <tr><td class="old-name">Frame 491</td><td class="what-is">Hero &mdash; division name</td><td class="new-name">hero-division</td></tr>
+          <tr><td class="old-name">Frame 653</td><td class="what-is">Stats table ("at a Glance")</td><td class="new-name">stats-table</td></tr>
+          <tr><td class="old-name">Frame 596</td><td class="what-is">"About [Division] Racing" two-column</td><td class="new-name">about-division</td></tr>
+          <tr><td class="old-name">Frame 654</td><td class="what-is">"2026 Program" two-column</td><td class="new-name">program-current</td></tr>
+          <tr><td class="old-name">Frame 602</td><td class="what-is">Team info section</td><td class="new-name">team-info</td></tr>
+          <tr><td class="old-name">Frame 594</td><td class="what-is">"Key Tracks" list</td><td class="new-name">key-tracks</td></tr>
+          <tr><td class="old-name">Frame 595</td><td class="what-is">"Results & Recaps" table</td><td class="new-name">results-table</td></tr>
+          <tr><td class="old-name">Frame 655/656</td><td class="what-is">CTA / closing section</td><td class="new-name">cta-closing</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Don't Stop at the Section Level</h3>
+      <p>Inside each section, rename the key children too:</p>
+      <div class="code-block"><span class="bad">BAD:</span>
+  hero-home
+    <span class="dim">&boxvr;&HorizontalLine;&HorizontalLine;</span> Frame 127
+    <span class="dim">&boxvr;&HorizontalLine;&HorizontalLine;</span> Frame 128
+    <span class="dim">&boxvr;&HorizontalLine;&HorizontalLine;</span> Group 45
+    <span class="dim">&boxur;&HorizontalLine;&HorizontalLine;</span> Rectangle 98
+
+<span class="good">GOOD:</span>
+  hero-home
+    <span class="dim">&boxvr;&HorizontalLine;&HorizontalLine;</span> hero-background-image
+    <span class="dim">&boxvr;&HorizontalLine;&HorizontalLine;</span> hero-content
+    <span class="dim">&boxv;   &boxvr;&HorizontalLine;&HorizontalLine;</span> hero-heading
+    <span class="dim">&boxv;   &boxvr;&HorizontalLine;&HorizontalLine;</span> hero-subheading
+    <span class="dim">&boxv;   &boxur;&HorizontalLine;&HorizontalLine;</span> hero-cta-button
+    <span class="dim">&boxur;&HorizontalLine;&HorizontalLine;</span> hero-overlay</div>
+    </div>
+  </div>
+
+  <div class="callout callout-green">
+    <strong>Time estimate:</strong> ~2 hours for the full file. Start with the Homepage layers only &mdash; that unlocks Jorge's Monday build.
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== GUIDE 2: COMPONENTS ===== -->
+<section id="guide-2" class="animate-in">
+  <div class="section-header">
+    <div class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Guide 02 &mdash; Assigned to Mayo
+    </div>
+    <h2 class="section-title">Turn Repeated Sections into Components</h2>
+    <p class="section-desc">The Footer and Nav Bar are proper Figma components &mdash; editing the main component updates every page. Every other repeated section is a copy-pasted frame with no shared updates.</p>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>How to Create a Component from a Frame</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Find the cleanest version</h4>
+            <p>For example, take the "About Division" two-column block on the Pro Truck page &mdash; it has text, image, and background.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Select the frame</h4>
+            <p>Click on the section frame in the layers panel.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Create Component</h4>
+            <p>Right-click &rarr; <strong>Create Component</strong> (or press <code style="color:var(--accent-cyan)">Ctrl/Cmd + Alt + K</code>).</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Name it properly</h4>
+            <p>Use the naming convention from Guide 1: <strong style="color:var(--accent-green)">about-division</strong></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Replace copy-pasted copies</h4>
+            <p>Go to every other page that has the same section. Delete the old frame. Drag an <strong>instance</strong> of the new component from the Assets panel. Override text and images for that page.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Which Sections Should Be Components</h3>
+      <table class="rename-table">
+        <thead><tr><th>Section</th><th>Pages It Appears On</th><th>Component?</th></tr></thead>
+        <tbody>
+          <tr><td class="new-name">hero</td><td class="what-is">All 14+ pages</td><td><strong style="color:var(--accent-green)">Yes</strong></td></tr>
+          <tr><td class="new-name">two-col-text-image</td><td class="what-is">About, Pro Truck, Modified, LMSC, Sponsorship, Article</td><td><strong style="color:var(--accent-green)">Yes</strong> &mdash; most reused</td></tr>
+          <tr><td class="new-name">stats-table</td><td class="what-is">Pro Truck, Modified, LMSC</td><td><strong style="color:var(--accent-green)">Yes</strong></td></tr>
+          <tr><td class="new-name">results-table</td><td class="what-is">Homepage, Pro Truck, Modified, LMSC</td><td><strong style="color:var(--accent-green)">Yes</strong></td></tr>
+          <tr><td class="new-name">key-tracks-list</td><td class="what-is">Pro Truck, Modified, LMSC</td><td><strong style="color:var(--accent-green)">Yes</strong></td></tr>
+          <tr><td class="new-name">sponsors-row</td><td class="what-is">Homepage, Sponsors page</td><td><strong style="color:var(--accent-green)">Yes</strong></td></tr>
+          <tr><td class="new-name">cta-closing</td><td class="what-is">Pro Truck, Modified, LMSC, Sponsorship, FAQ</td><td><strong style="color:var(--accent-green)">Yes</strong></td></tr>
+          <tr><td class="new-name">pull-quote</td><td class="what-is">About, Article</td><td><strong style="color:var(--accent-green)">Yes</strong></td></tr>
+          <tr><td style="color:var(--text-muted)">charity-section</td><td class="what-is">Homepage only</td><td style="color:var(--text-muted)">No &mdash; one-off</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout callout-green">
+    <strong>You already know how to do this.</strong> The Button Components page has Red Filled, Red Stroked, and Arrow Down variants with states. Same concept, applied to page sections instead of buttons.
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== GUIDE 3: VARIANTS ===== -->
+<section id="guide-3" class="animate-in">
+  <div class="section-header">
+    <div class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+      Guide 03 &mdash; Assigned to Mayo
+    </div>
+    <h2 class="section-title">Add Variants &amp; Properties</h2>
+    <p class="section-desc">Variants are different versions of the same component that Figma treats as one thing with toggle-able options. Claude Code reads these toggles and generates code that handles all variations automatically.</p>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Step-by-Step: Hero Component Variants</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Create the first variant</h4>
+            <p>Take the Homepage hero (now named <strong style="color:var(--accent-green)">hero-home</strong>) and make it a component.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Create additional variants</h4>
+            <p>Duplicate the hero component. Modify the duplicate to match the division pages hero (different layout, no video, smaller height). Duplicate again for the simple hero (FAQ, Contact).</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Combine as Variants</h4>
+            <p>Select all hero variants. Right-click &rarr; <strong>Combine as Variants</strong>. Figma wraps them in a dashed-border Component Set.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Name the property</h4>
+            <p>Figma creates "Property 1" &mdash; rename it to <strong style="color:var(--accent-cyan)">Type</strong> with values: <strong style="color:var(--accent-green)">Home</strong>, <strong style="color:var(--accent-green)">Division</strong>, <strong style="color:var(--accent-green)">Simple</strong></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Use it</h4>
+            <p>On each page, place an instance of <strong>hero</strong> and toggle the <strong style="color:var(--accent-cyan)">Type</strong> property. No more copy-pasting separate frames.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Which Components Need Variants</h3>
+      <table class="variant-table">
+        <thead><tr><th>Component</th><th>Property Name</th><th>Values</th></tr></thead>
+        <tbody>
+          <tr><td><strong>hero</strong></td><td class="prop">Type</td><td class="val">Home, Division, Simple, Article</td></tr>
+          <tr><td><strong>two-col-text-image</strong></td><td class="prop">Image Position</td><td class="val">Left, Right</td></tr>
+          <tr><td><strong>two-col-text-image</strong></td><td class="prop">Has Background</td><td class="val">True, False</td></tr>
+          <tr><td><strong>results-table</strong></td><td class="prop">Columns</td><td class="val">4-column, 6-column</td></tr>
+          <tr><td><strong>cta-section</strong></td><td class="prop">Style</td><td class="val">Dark, Red-accent</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Boolean Properties (Show/Hide)</h3>
+      <p>For elements that sometimes appear and sometimes don't:</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Select the element inside the component</h4>
+            <p>For example, a subtitle text layer that only some pages use.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Add a Boolean property</h4>
+            <p>In the right panel, click <strong>+</strong> next to Properties &rarr; choose <strong>Boolean</strong> &rarr; name it <strong style="color:var(--accent-cyan)">Show Subtitle</strong>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Toggle per instance</h4>
+            <p>On each page, turn the subtitle on or off without deleting anything.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>This is what Jorge meant on the call</strong> when he talked about "a button that tells me we have one column or two columns." He was describing Variant and Boolean properties. This guide shows you how to build exactly what he needs.
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== GUIDE 4: TOKENS ===== -->
+<section id="guide-4" class="animate-in">
+  <div class="section-header">
+    <div class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17" cy="15.5" r="2.5"/><circle cx="8.5" cy="15.5" r="2.5"/></svg>
+      Guide 04 &mdash; Assigned to Mayo &mdash; Quick Win
+    </div>
+    <h2 class="section-title">Set Up Design Tokens as Figma Variables</h2>
+    <p class="section-desc">The Matthew file has no Figma Variables defined. Claude Code's token extraction tool returns empty. 30 minutes of work to fix.</p>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Create Color Variables</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Open the Local Variables panel</h4>
+            <p>Click the grid icon in the right sidebar, or use the keyboard shortcut for Variables.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Create each color variable</h4>
+            <p>Click <strong>Create Variable &rarr; Color</strong> for each one.</p>
+          </div>
+        </div>
+      </div>
+
+      <table class="variant-table" style="margin-top:1rem">
+        <thead><tr><th>Variable Name</th><th>How to Get the Value</th><th>Where It's Used</th></tr></thead>
+        <tbody>
+          <tr><td class="prop">color/primary-red</td><td>Eyedrop from any CTA button</td><td class="val">CTAs, accents, hover states</td></tr>
+          <tr><td class="prop">color/background-dark</td><td>Eyedrop from page background</td><td class="val">Page backgrounds</td></tr>
+          <tr><td class="prop">color/background-section</td><td>Eyedrop from alternating section bg</td><td class="val">Section backgrounds</td></tr>
+          <tr><td class="prop">color/text-primary</td><td>Eyedrop from heading text</td><td class="val">Headings, body text</td></tr>
+          <tr><td class="prop">color/text-secondary</td><td>Eyedrop from subtitle/caption text</td><td class="val">Subtitles, captions</td></tr>
+          <tr><td class="prop">color/border-red</td><td>Eyedrop from red border/divider</td><td class="val">Dividers, button borders</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Apply the Variables</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Select a frame or text layer</h4>
+            <p>Start with the Homepage hero background.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Open the color picker</h4>
+            <p>Click the color swatch in the Fill or Stroke property.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <div class="step-body">
+            <h4>Switch to Variables</h4>
+            <p>Click the small hex icon &rarr; switch to the Variables tab &rarr; select the matching variable.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-green">
+    <strong>Priority: Colors first.</strong> Just the 6 color variables is a huge improvement. Typography and spacing can wait. This is a 30-minute task that unlocks automatic token extraction for the entire build.
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== GUIDE 5: INVENTORY ===== -->
+<section id="guide-5" class="animate-in">
+  <div class="section-header">
+    <div class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+      Guide 05 &mdash; Reference for Jorge
+    </div>
+    <h2 class="section-title">Component Inventory &amp; Build Order</h2>
+    <p class="section-desc">Every unique section across all 14 pages, cross-referenced for reuse. This replaces the manual heat map &mdash; generated directly from the Figma file metadata.</p>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Full Component Map</h3>
+      <div style="overflow-x:auto">
+      <table class="inventory-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Home</th><th>About</th><th>Pro&nbsp;T</th><th>Mod</th><th>LMSC</th>
+            <th>Spnsr</th><th>Race</th><th>Sched</th><th>Artic</th><th>Press</th>
+            <th>FAQ</th><th>Gall</th><th>Cntct</th><th>Spnrs</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>navbar</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td></tr>
+          <tr><td>footer</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td></tr>
+          <tr><td>hero</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td></tr>
+          <tr><td>stats-banner</td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>divisions-carousel</td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>two-col-text-image</td><td></td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td></td><td></td><td class="dot">&bull;</td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>stats-table</td><td></td><td></td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>results-table</td><td class="dot">&bull;</td><td></td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>team-info</td><td></td><td></td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>key-tracks-list</td><td></td><td></td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>bio-section</td><td></td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>career-highlights</td><td></td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>social-feed</td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>merch-grid</td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>charity-section</td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>sponsors-row</td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="dot">&bull;</td></tr>
+          <tr><td>upcoming-races</td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>pull-quote</td><td></td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>sponsorship-tiers</td><td></td><td></td><td></td><td></td><td></td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>racing-overview</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>schedule-table</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>article-body</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>media-downloads</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>faq-accordion</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="dot">&bull;</td><td></td><td></td><td></td></tr>
+          <tr><td>gallery-grid</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="dot">&bull;</td><td></td><td></td></tr>
+          <tr><td>contact-form</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="dot">&bull;</td><td></td></tr>
+          <tr><td>cta-closing</td><td></td><td></td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td class="dot">&bull;</td><td></td><td></td><td></td><td></td><td class="dot">&bull;</td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Build Order &amp; Coverage Heat Map</h3>
+      <p>After building the homepage + division pages, <strong style="color:var(--accent-green)">~70% of all components are done.</strong> The remaining pages are mostly assembly.</p>
+      <table class="heat-table">
+        <thead><tr><th>Page</th><th>Total Sections</th><th>Already Built</th><th>New Needed</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Homepage</strong></td><td class="num">12</td><td class="num-green">&mdash;</td><td class="num-orange">12 (build first)</td></tr>
+          <tr><td><strong>Pro Truck</strong></td><td class="num">10</td><td class="num-green">4</td><td class="num-orange">6</td></tr>
+          <tr><td>Modified</td><td class="num">10</td><td class="num-green">10</td><td class="num-orange">0 (same as Pro Truck)</td></tr>
+          <tr><td>LMSC</td><td class="num">10</td><td class="num-green">10</td><td class="num-orange">0 (same as Pro Truck)</td></tr>
+          <tr><td>About</td><td class="num">8</td><td class="num-green">3</td><td class="num-orange">5</td></tr>
+          <tr><td>Sponsorship</td><td class="num">6</td><td class="num-green">3</td><td class="num-orange">3</td></tr>
+          <tr><td>Article</td><td class="num">8</td><td class="num-green">3</td><td class="num-orange">5</td></tr>
+          <tr><td>Press Kit</td><td class="num">6</td><td class="num-green">3</td><td class="num-orange">3</td></tr>
+          <tr><td>FAQ</td><td class="num">5</td><td class="num-green">3</td><td class="num-orange">2</td></tr>
+          <tr><td>Gallery</td><td class="num">3</td><td class="num-green">2</td><td class="num-orange">1</td></tr>
+          <tr><td>Contact</td><td class="num">4</td><td class="num-green">2</td><td class="num-orange">2</td></tr>
+          <tr><td>Sponsors</td><td class="num">3</td><td class="num-green">3</td><td class="num-orange">0</td></tr>
+          <tr><td>Racing</td><td class="num">4</td><td class="num-green">3</td><td class="num-orange">1</td></tr>
+          <tr><td>Schedule</td><td class="num">4</td><td class="num-green">3</td><td class="num-orange">1</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== GUIDE 6: CLEANUP ===== -->
+<section id="guide-6" class="animate-in">
+  <div class="section-header">
+    <div class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+      Guide 06 &mdash; Assigned to Mayo
+    </div>
+    <h2 class="section-title">Clean Up Duplicate Pages</h2>
+    <p class="section-desc">Three sets of duplicate pages need to be resolved before the build starts.</p>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Duplicates to Resolve</h3>
+      <table class="rename-table">
+        <thead><tr><th>Page Name</th><th>Issue</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td class="old-name">Late Model Stock Car (x2)</td><td class="what-is">Two versions exist</td><td class="new-name">Keep final &rarr; archive the other</td></tr>
+          <tr><td class="old-name">Racing Overview Page (x2)</td><td class="what-is">Second has more sections</td><td class="new-name">Keep fuller version &rarr; archive the other</td></tr>
+          <tr><td class="old-name">FAQ (x2)</td><td class="what-is">Two different layouts</td><td class="new-name">Pick preferred &rarr; archive the other</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout" style="margin-top:1.5rem">
+        <strong>How to archive:</strong> Create a separate Figma page called "Archive" or prefix old versions with <strong style="color:var(--accent-cyan)">_OLD -</strong>. Do NOT delete &mdash; Jorge may need to reference old explorations.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== SCHEDULE ===== -->
+<section id="schedule" class="animate-in">
+  <div class="section-header">
+    <div class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Schedule
+    </div>
+    <h2 class="section-title">Priority Order</h2>
+    <p class="section-desc">Who does what, and when.</p>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Mayo's Priority Order</h3>
+      <ol class="priority-list">
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Rename Homepage layers</strong> &mdash; unlocks Jorge's Monday build</div><div class="pri-ref">Guide 1 &mdash; Homepage only &mdash; ~30 min</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Create color variables</strong> &mdash; quick win, unlocks token extraction</div><div class="pri-ref">Guide 4 &mdash; 30 min</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Rename remaining page layers</strong> &mdash; About, division pages, inner pages</div><div class="pri-ref">Guide 1 &mdash; rest of file &mdash; ~1.5 hours</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Create section components</strong> &mdash; hero and two-col-text-image first</div><div class="pri-ref">Guide 2 &mdash; ~3 hours</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Clean up duplicates</strong> &mdash; archive old versions of 3 duplicate pages</div><div class="pri-ref">Guide 6 &mdash; 30 min</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Add variants</strong> &mdash; stretch goal, start with hero component</div><div class="pri-ref">Guide 3 &mdash; ~1 hour per component</div></div></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Jorge's Priority Order</h3>
+      <ol class="priority-list">
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Read Guide 5</strong> &mdash; understand the 27-component inventory</div><div class="pri-ref">Reference &mdash; 15 min</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build navbar, footer, buttons</strong> &mdash; global components</div><div class="pri-ref">Today</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build homepage</strong> &mdash; sections top to bottom</div><div class="pri-ref">Monday &mdash; needs Mayo's renamed layers</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Cross-reference heat map</strong> &mdash; see what's already done for inner pages</div><div class="pri-ref">Guide 5 &mdash; after homepage</div></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-brand">Mileage Design</div>
+  <p>Figma-to-Claude Code Pipeline Training &mdash; Matthew Laprade Racing</p>
+  <p>Generated from Figma file metadata &mdash; April 2026</p>
+</footer>
+
+<script>
+// Scroll animations
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.08 });
+document.querySelectorAll('.animate-in').forEach(el => obs.observe(el));
+
+// Active nav tracking
+const navLinks = document.querySelectorAll('.nav a');
+const sections = [];
+navLinks.forEach(a => {
+  const id = a.getAttribute('href').replace('#','');
+  const el = document.getElementById(id);
+  if (el) sections.push({ el, link: a });
+});
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY + 150;
+  let current = sections[0];
+  sections.forEach(s => { if (s.el.offsetTop <= scrollY) current = s; });
+  navLinks.forEach(a => a.classList.remove('active'));
+  if (current) current.link.classList.add('active');
+});
+</script>
+
+</body>
+</html>
