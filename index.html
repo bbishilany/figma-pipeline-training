@@ -175,6 +175,8 @@
     .badge-jorge { background: rgba(249,115,22,0.15); color: var(--accent-orange); border: 1px solid rgba(249,115,22,0.3); }
     .badge-both { background: rgba(6,182,212,0.15); color: var(--accent-cyan); border: 1px solid rgba(6,182,212,0.3); }
     .badge-priority { background: rgba(239,68,68,0.15); color: var(--accent-red); border: 1px solid rgba(239,68,68,0.3); }
+    .badge-updated { background: rgba(251,191,36,0.18); color: #FBBF24; border: 1px solid rgba(251,191,36,0.35); animation: pulse-update 2s ease-in-out 3; }
+    @keyframes pulse-update { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
 
     /* ===== GUIDE CARDS (hub) ===== */
     .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
@@ -436,7 +438,7 @@
       </div>
       <div class="hero-meta-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        ~6 Hours Total
+        ~4 Hours Total
       </div>
       <div class="hero-meta-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
@@ -495,7 +497,7 @@
       Why This Matters
     </div>
     <h2 class="section-title">The Problem We're Solving</h2>
-    <p class="section-desc">When Claude Code reads a Figma file to build a website, it needs three things: descriptive layer names, reusable components, and defined design tokens. The Matthew file is missing all three.</p>
+    <p class="section-desc">When Claude Code reads a Figma file to build a website, the single highest-impact factor is <strong>descriptive layer names</strong>. After that: consistent visual styles applied across the file, and logical section grouping. Components and variables help but are not required &mdash; Claude reads each page section-by-section and generates code from what it sees.</p>
   </div>
 
   <div class="hub-grid">
@@ -518,10 +520,11 @@
     <div class="card hub-tile tile-purple" onclick="document.getElementById('guide-2').scrollIntoView({behavior:'smooth'})">
       <div class="hub-tile-body">
         <div class="hub-tile-num">Guide 02 &mdash; Reusability</div>
-        <h3>Create Section Components</h3>
-        <p>Only the footer, navbar, and buttons are actual Figma components. Every other repeated section is a copy-pasted frame &mdash; no shared updates, no variant support.</p>
+        <h3>Components &mdash; Only What's Truly Identical</h3>
+        <p>Navbar, footer, and buttons are already proper components. Only add new components for elements that repeat with the <strong>exact same structure</strong>. Sections with small variations (extra button, different subheadline) stay as well-named frames.</p>
         <div class="hub-tile-meta">
           <span class="badge badge-mayo">Mayo</span>
+          <span class="badge badge-updated">Updated</span>
         </div>
         <div class="hub-tile-cta">
           Jump to Guide
@@ -548,10 +551,11 @@
     <div class="card hub-tile tile-green" onclick="document.getElementById('guide-4').scrollIntoView({behavior:'smooth'})">
       <div class="hub-tile-body">
         <div class="hub-tile-num">Guide 04 &mdash; Quick Win</div>
-        <h3>Set Up Design Tokens</h3>
-        <p>No Figma Variables are defined &mdash; colors and typography are applied directly. Claude Code's token extraction returns empty. 30 minutes to fix.</p>
+        <h3>Verify Your Design Styles</h3>
+        <p>Your existing color styles and text styles are exactly what we need. Claude Code reads the values from applied styles. Variables are optional &mdash; and can't handle gradients or blend modes anyway. 15 minutes to verify coverage.</p>
         <div class="hub-tile-meta">
           <span class="badge badge-mayo">Mayo</span>
+          <span class="badge badge-updated">Updated</span>
         </div>
         <div class="hub-tile-cta">
           Jump to Guide
@@ -719,77 +723,69 @@
   <div class="section-header">
     <div class="section-label">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      Guide 02 &mdash; Assigned to Mayo
+      Guide 02 &mdash; Assigned to Mayo &nbsp; <span class="badge badge-updated">Updated</span>
     </div>
-    <h2 class="section-title">Turn Repeated Sections into Components</h2>
-    <p class="section-desc">The Footer and Nav Bar are proper Figma components &mdash; editing the main component updates every page. Every other repeated section is a copy-pasted frame with no shared updates.</p>
+    <h2 class="section-title">Components &mdash; Only What's Truly Identical</h2>
+    <p class="section-desc">Navbar, footer, and buttons are already proper components &mdash; great. The original guide asked you to componentize every repeated section. That was over-engineered. If a section varies between pages (extra button, different subheadline, different CTA), forcing it into a single component with single-use variants defeats the purpose.</p>
+  </div>
+
+  <div class="callout callout-red">
+    <strong>Updated approach:</strong> Claude Code does NOT need Figma components to generate code components. It reads each page section-by-section via the MCP and generates code from what it sees. What matters most is <strong>descriptive layer names</strong> (Guide 1) and <strong>consistent styles</strong> (Guide 4). Figma components are a bonus for your own workflow &mdash; not a build requirement.
   </div>
 
   <div class="content-block card">
     <div class="card-body">
-      <h3>How to Create a Component from a Frame</h3>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num"></div>
-          <div class="step-body">
-            <h4>Find the cleanest version</h4>
-            <p>For example, take the "About Division" two-column block on the Pro Truck page &mdash; it has text, image, and background.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num"></div>
-          <div class="step-body">
-            <h4>Select the frame</h4>
-            <p>Click on the section frame in the layers panel.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num"></div>
-          <div class="step-body">
-            <h4>Create Component</h4>
-            <p>Right-click &rarr; <strong>Create Component</strong> (or press <code style="color:var(--accent-cyan)">Ctrl/Cmd + Alt + K</code>).</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num"></div>
-          <div class="step-body">
-            <h4>Name it properly</h4>
-            <p>Use the naming convention from Guide 1: <strong style="color:var(--accent-green)">about-division</strong></p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num"></div>
-          <div class="step-body">
-            <h4>Replace copy-pasted copies</h4>
-            <p>Go to every other page that has the same section. Delete the old frame. Drag an <strong>instance</strong> of the new component from the Assets panel. Override text and images for that page.</p>
-          </div>
-        </div>
-      </div>
+      <h3>The New Rule: Component vs. Named Frame</h3>
+      <p><strong style="color:var(--accent-green)">Make it a component</strong> when the element repeats with the <strong>exact same structure</strong> &mdash; same children, same layout, only text/image content changes.</p>
+      <p><strong style="color:var(--accent-cyan)">Keep it as a named frame</strong> when the section varies between pages &mdash; extra buttons, different subheadlines, different element counts. A well-named frame is better than a component with one instance.</p>
+      <div class="code-block"><span class="good">COMPONENT</span> <span class="dim">&mdash; identical structure, content-only overrides</span>
+  navbar, footer, buttons, sponsor-logo-row, social-icon-set
+
+<span class="good">NAMED FRAME</span> <span class="dim">&mdash; similar layout but small structural differences per page</span>
+  hero sections, two-col-text-image blocks, CTA sections,
+  content sections with varying buttons/subheadlines
+
+<span class="bad">DON'T DO THIS</span> <span class="dim">&mdash; component variant with 1 instance</span>
+  hero Type=Article (only used once on one page)</div>
     </div>
   </div>
 
   <div class="content-block card">
     <div class="card-body">
-      <h3>Which Sections Should Be Components</h3>
+      <h3>Updated Section Assessment</h3>
       <table class="rename-table">
-        <thead><tr><th>Section</th><th>Pages It Appears On</th><th>Component?</th></tr></thead>
+        <thead><tr><th>Section</th><th>Pages It Appears On</th><th>Recommendation</th></tr></thead>
         <tbody>
-          <tr><td class="new-name">hero</td><td class="what-is">All 14+ pages</td><td><strong style="color:var(--accent-green)">Yes</strong></td></tr>
-          <tr><td class="new-name">two-col-text-image</td><td class="what-is">About, Pro Truck, Modified, LMSC, Sponsorship, Article</td><td><strong style="color:var(--accent-green)">Yes</strong> &mdash; most reused</td></tr>
-          <tr><td class="new-name">stats-table</td><td class="what-is">Pro Truck, Modified, LMSC</td><td><strong style="color:var(--accent-green)">Yes</strong></td></tr>
-          <tr><td class="new-name">results-table</td><td class="what-is">Homepage, Pro Truck, Modified, LMSC</td><td><strong style="color:var(--accent-green)">Yes</strong></td></tr>
-          <tr><td class="new-name">key-tracks-list</td><td class="what-is">Pro Truck, Modified, LMSC</td><td><strong style="color:var(--accent-green)">Yes</strong></td></tr>
-          <tr><td class="new-name">sponsors-row</td><td class="what-is">Homepage, Sponsors page</td><td><strong style="color:var(--accent-green)">Yes</strong></td></tr>
-          <tr><td class="new-name">cta-closing</td><td class="what-is">Pro Truck, Modified, LMSC, Sponsorship, FAQ</td><td><strong style="color:var(--accent-green)">Yes</strong></td></tr>
-          <tr><td class="new-name">pull-quote</td><td class="what-is">About, Article</td><td><strong style="color:var(--accent-green)">Yes</strong></td></tr>
-          <tr><td style="color:var(--text-muted)">charity-section</td><td class="what-is">Homepage only</td><td style="color:var(--text-muted)">No &mdash; one-off</td></tr>
+          <tr><td class="new-name">navbar</td><td class="what-is">All 14+ pages</td><td><strong style="color:var(--accent-green)">Already a component</strong> &mdash; done</td></tr>
+          <tr><td class="new-name">footer</td><td class="what-is">All 14+ pages</td><td><strong style="color:var(--accent-green)">Already a component</strong> &mdash; done</td></tr>
+          <tr><td class="new-name">buttons</td><td class="what-is">All pages</td><td><strong style="color:var(--accent-green)">Already a component</strong> &mdash; done</td></tr>
+          <tr><td class="new-name">sponsors-row</td><td class="what-is">Homepage, Sponsors page</td><td><strong style="color:var(--accent-green)">Component</strong> &mdash; identical logo grid, content-only swap</td></tr>
+          <tr><td class="new-name">stats-table</td><td class="what-is">Pro Truck, Modified, LMSC</td><td><strong style="color:var(--accent-green)">Component</strong> &mdash; same table structure, data-only swap</td></tr>
+          <tr><td class="new-name">results-table</td><td class="what-is">Homepage, Pro Truck, Modified, LMSC</td><td><strong style="color:var(--accent-green)">Component</strong> &mdash; same table structure, data-only swap</td></tr>
+          <tr><td style="color:var(--accent-cyan)">hero sections</td><td class="what-is">All pages &mdash; but structure varies</td><td><strong style="color:var(--accent-cyan)">Named frames</strong> &mdash; each has different layout, keep as named frames per page</td></tr>
+          <tr><td style="color:var(--accent-cyan)">two-col-text-image</td><td class="what-is">About, Pro Truck, Modified, LMSC, etc.</td><td><strong style="color:var(--accent-cyan)">Named frames</strong> &mdash; extra buttons/subheadlines vary per page</td></tr>
+          <tr><td style="color:var(--accent-cyan)">cta-closing</td><td class="what-is">Pro Truck, Modified, LMSC, Sponsorship, FAQ</td><td><strong style="color:var(--accent-cyan)">Named frames</strong> &mdash; style/content varies per page</td></tr>
+          <tr><td style="color:var(--text-muted)">all other sections</td><td class="what-is">1-2 pages each</td><td style="color:var(--text-muted)">Named frames &mdash; one-offs don't need components</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>For Sections That Stay as Frames</h3>
+      <p>The naming from Guide 1 does the heavy lifting. As long as each section frame has a descriptive name (<strong style="color:var(--accent-green)">hero-home</strong>, <strong style="color:var(--accent-green)">about-division</strong>, <strong style="color:var(--accent-green)">cta-closing</strong>) and its children are also named, Claude Code will:</p>
+      <ul>
+        <li>Recognize the section's purpose from the name</li>
+        <li>Extract typography and colors from the applied styles</li>
+        <li>Generate a code component with the right structure</li>
+        <li>Handle page-specific variations naturally (extra button = extra slot in the component)</li>
+      </ul>
+    </div>
+  </div>
+
   <div class="callout callout-green">
-    <strong>You already know how to do this.</strong> The Button Components page has Red Filled, Red Stroked, and Arrow Down variants with states. Same concept, applied to page sections instead of buttons.
+    <strong>Bottom line:</strong> You already have the three hardest components done (navbar, footer, buttons). Add sponsors-row, stats-table, and results-table if you have time. Everything else is fine as named frames. This guide originally estimated ~3 hours &mdash; the updated scope is ~45 minutes.
   </div>
 </section>
 
@@ -898,6 +894,10 @@
   <div class="callout">
     <strong>This is what Jorge meant on the call</strong> when he talked about "a button that tells me we have one column or two columns." He was describing Variant and Boolean properties. This guide shows you how to build exactly what he needs.
   </div>
+
+  <div class="callout callout-red">
+    <strong style="color:var(--accent-red)">Updated note:</strong> Per the Guide 2 update, only add variants to elements you've actually made components (stats-table, results-table, sponsors-row). <strong>Do not create hero variants or two-col-text-image variants</strong> &mdash; those stay as named frames since each page's version has structural differences. Variants with 1 instance each add complexity without value. <span class="badge badge-updated" style="margin-left:0.5rem">Updated</span>
+  </div>
 </section>
 
 <div class="divider"></div>
@@ -907,41 +907,51 @@
   <div class="section-header">
     <div class="section-label">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17" cy="15.5" r="2.5"/><circle cx="8.5" cy="15.5" r="2.5"/></svg>
-      Guide 04 &mdash; Assigned to Mayo &mdash; Quick Win
+      Guide 04 &mdash; Assigned to Mayo &mdash; Quick Win &nbsp; <span class="badge badge-updated">Updated</span>
     </div>
-    <h2 class="section-title">Set Up Design Tokens as Figma Variables</h2>
-    <p class="section-desc">The Matthew file has no Figma Variables defined. Claude Code's token extraction tool returns empty. 30 minutes of work to fix.</p>
+    <h2 class="section-title">Verify Your Design Styles</h2>
+    <p class="section-desc">The original guide asked you to create Figma Variables from scratch. You already have color styles and text styles set up &mdash; those are exactly what Claude Code needs. Variables are optional and can't handle gradients, blend modes, or effects anyway.</p>
+  </div>
+
+  <div class="callout callout-red">
+    <strong>What changed:</strong> The original guide said to create Figma Variables for every color. That's been replaced. Your existing <strong>color styles</strong> (Dark, White, Midtone, Accent-Bright, Accent-Dark, Glass BG Gradient) and <strong>text styles</strong> (Heading 1-4, Body Text 1-3, Button Text 1-2) are the design tokens. Claude Code reads the values from applied styles &mdash; hex codes, font specs, sizes &mdash; and we map them to Tailwind tokens on the code side.
   </div>
 
   <div class="content-block card">
     <div class="card-body">
-      <h3>Create Color Variables</h3>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num"></div>
-          <div class="step-body">
-            <h4>Open the Local Variables panel</h4>
-            <p>Click the grid icon in the right sidebar, or use the keyboard shortcut for Variables.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num"></div>
-          <div class="step-body">
-            <h4>Create each color variable</h4>
-            <p>Click <strong>Create Variable &rarr; Color</strong> for each one.</p>
-          </div>
-        </div>
-      </div>
+      <h3>Why Styles Work (and Why Variables Aren't Required)</h3>
+      <p>When Claude Code reads a Figma node via the MCP, it extracts <strong>whatever visual properties are applied</strong> &mdash; whether those come from a style or a variable or a direct value. The difference:</p>
+      <ul>
+        <li><strong>Variables</strong> &rarr; Claude sees the token name (<code style="color:var(--accent-cyan)">color/primary-red</code>) AND the hex value</li>
+        <li><strong>Styles</strong> &rarr; Claude sees the hex value directly (e.g., <code style="color:var(--accent-cyan)">#E63946</code>)</li>
+        <li><strong>Either way</strong> &rarr; we define the Tailwind config on the code side and map the values to semantic token names</li>
+      </ul>
+      <p>And critically: <strong>Variables cannot store gradients, blend modes, or effects.</strong> Figma's variable system only holds single scalar values (solid color, number, boolean). Your <strong style="color:var(--accent-green)">Glass BG Gradient</strong> style, any drop shadows, and blend modes <em>must</em> be styles. Don't redo what already works.</p>
+    </div>
+  </div>
 
-      <table class="variant-table" style="margin-top:1rem">
-        <thead><tr><th>Variable Name</th><th>How to Get the Value</th><th>Where It's Used</th></tr></thead>
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Your Current Styles (Verified)</h3>
+      <table class="variant-table" style="margin-top:0.5rem">
+        <thead><tr><th>Style Name</th><th>Type</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td class="prop">color/primary-red</td><td>Eyedrop from any CTA button</td><td class="val">CTAs, accents, hover states</td></tr>
-          <tr><td class="prop">color/background-dark</td><td>Eyedrop from page background</td><td class="val">Page backgrounds</td></tr>
-          <tr><td class="prop">color/background-section</td><td>Eyedrop from alternating section bg</td><td class="val">Section backgrounds</td></tr>
-          <tr><td class="prop">color/text-primary</td><td>Eyedrop from heading text</td><td class="val">Headings, body text</td></tr>
-          <tr><td class="prop">color/text-secondary</td><td>Eyedrop from subtitle/caption text</td><td class="val">Subtitles, captions</td></tr>
-          <tr><td class="prop">color/border-red</td><td>Eyedrop from red border/divider</td><td class="val">Dividers, button borders</td></tr>
+          <tr><td class="prop">Dark</td><td>Color style</td><td class="val">Keep &mdash; apply consistently</td></tr>
+          <tr><td class="prop">White</td><td>Color style</td><td class="val">Keep &mdash; apply consistently</td></tr>
+          <tr><td class="prop">Midtone</td><td>Color style</td><td class="val">Keep &mdash; apply consistently</td></tr>
+          <tr><td class="prop">Accent - Bright</td><td>Color style</td><td class="val">Keep &mdash; apply consistently</td></tr>
+          <tr><td class="prop">Accent - Dark</td><td>Color style</td><td class="val">Keep &mdash; apply consistently</td></tr>
+          <tr><td class="prop">Glass BG Gradient</td><td>Color style (gradient)</td><td class="val">Keep &mdash; <strong>cannot be a variable</strong></td></tr>
+          <tr><td class="prop">Heading 1</td><td>Text style &mdash; 81.5/121</td><td class="val">Keep</td></tr>
+          <tr><td class="prop">Heading 2</td><td>Text style &mdash; 50/121</td><td class="val">Keep</td></tr>
+          <tr><td class="prop">Heading 3</td><td>Text style &mdash; 30/124</td><td class="val">Keep</td></tr>
+          <tr><td class="prop">Heading 3 - Italicized</td><td>Text style &mdash; 30/124</td><td class="val">Keep</td></tr>
+          <tr><td class="prop">Heading 4</td><td>Text style &mdash; 20/177</td><td class="val">Keep</td></tr>
+          <tr><td class="prop">Body Text 1</td><td>Text style &mdash; 20/177</td><td class="val">Keep</td></tr>
+          <tr><td class="prop">Body Text 2</td><td>Text style &mdash; 12/177</td><td class="val">Keep</td></tr>
+          <tr><td class="prop">Body Text 3</td><td>Text style &mdash; 16/177</td><td class="val">Keep</td></tr>
+          <tr><td class="prop">Button Text</td><td>Text style &mdash; 12/128</td><td class="val">Keep</td></tr>
+          <tr><td class="prop">Button Text 2</td><td>Text style &mdash; 15/128</td><td class="val">Keep</td></tr>
         </tbody>
       </table>
     </div>
@@ -949,35 +959,42 @@
 
   <div class="content-block card">
     <div class="card-body">
-      <h3>Apply the Variables</h3>
+      <h3>What to Do (15 Minutes)</h3>
       <div class="steps">
         <div class="step">
           <div class="step-num"></div>
           <div class="step-body">
-            <h4>Select a frame or text layer</h4>
-            <p>Start with the Homepage hero background.</p>
+            <h4>Audit style coverage</h4>
+            <p>Spot-check 3-4 pages. Are all text layers using text styles (not locally overridden)? Are all fills using color styles? Look for the small <strong style="color:var(--accent-cyan)">"detached"</strong> indicator in the right panel &mdash; that means a layer has a style assigned but was manually overridden.</p>
           </div>
         </div>
         <div class="step">
           <div class="step-num"></div>
           <div class="step-body">
-            <h4>Open the color picker</h4>
-            <p>Click the color swatch in the Fill or Stroke property.</p>
+            <h4>Reattach any detached styles</h4>
+            <p>If a heading uses the right font/size but isn't linked to the "Heading 1" style, select it &rarr; click the style picker &rarr; select the matching style. This ensures consistency.</p>
           </div>
         </div>
         <div class="step">
           <div class="step-num"></div>
           <div class="step-body">
-            <h4>Switch to Variables</h4>
-            <p>Click the small hex icon &rarr; switch to the Variables tab &rarr; select the matching variable.</p>
+            <h4>Check for "raw" colors</h4>
+            <p>If any section background, border, or text uses a raw hex value instead of one of your 6 color styles, apply the correct style. The goal: every color in the file should trace back to one of your defined styles.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>When Would You Add Variables? (Optional / Future)</h3>
+      <p>Variables become useful when you need <strong>theming</strong> (light mode / dark mode toggle) or <strong>responsive spacing tokens</strong>. For a single-theme site like Matthew Laprade Racing, your styles cover everything. If theming becomes a requirement later, you can layer variables on top of your existing styles without redoing anything.</p>
+    </div>
+  </div>
+
   <div class="callout callout-green">
-    <strong>Priority: Colors first.</strong> Just the 6 color variables is a huge improvement. Typography and spacing can wait. This is a 30-minute task that unlocks automatic token extraction for the entire build.
+    <strong>Bottom line:</strong> Your styles are the design tokens. Don't create variables just because the old guide said to. Spot-check that styles are applied consistently across pages &mdash; that's the only task here. Estimated: ~15 minutes instead of the original 30.
   </div>
 </section>
 
@@ -1118,9 +1135,9 @@
       <h3>Mayo's Priority Order</h3>
       <ol class="priority-list">
         <li><div class="pri-num"></div><div><div class="pri-text"><strong>Rename Homepage layers</strong> &mdash; unlocks Jorge's Monday build</div><div class="pri-ref">Guide 1 &mdash; Homepage only &mdash; ~30 min</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Create color variables</strong> &mdash; quick win, unlocks token extraction</div><div class="pri-ref">Guide 4 &mdash; 30 min</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Verify style coverage</strong> &mdash; spot-check that color &amp; text styles are applied consistently <span class="badge badge-updated" style="margin-left:0.5rem; font-size:0.6rem">Updated</span></div><div class="pri-ref">Guide 4 &mdash; 15 min</div></div></li>
         <li><div class="pri-num"></div><div><div class="pri-text"><strong>Rename remaining page layers</strong> &mdash; About, division pages, inner pages</div><div class="pri-ref">Guide 1 &mdash; rest of file &mdash; ~1.5 hours</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Create section components</strong> &mdash; hero and two-col-text-image first</div><div class="pri-ref">Guide 2 &mdash; ~3 hours</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Add components for truly identical elements only</strong> &mdash; sponsors-row, stats-table, results-table <span class="badge badge-updated" style="margin-left:0.5rem; font-size:0.6rem">Updated</span></div><div class="pri-ref">Guide 2 &mdash; ~45 min (reduced from 3 hours)</div></div></li>
         <li><div class="pri-num"></div><div><div class="pri-text"><strong>Clean up duplicates</strong> &mdash; archive old versions of 3 duplicate pages</div><div class="pri-ref">Guide 6 &mdash; 30 min</div></div></li>
         <li><div class="pri-num"></div><div><div class="pri-text"><strong>Add variants</strong> &mdash; stretch goal, start with hero component</div><div class="pri-ref">Guide 3 &mdash; ~1 hour per component</div></div></li>
       </ol>
