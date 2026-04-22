@@ -384,6 +384,79 @@
       font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;
     }
 
+    /* ===== SITE BUILD TAB ===== */
+    .build-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .build-page-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-card);
+      padding: 1.25rem 1.5rem; transition: var(--transition); position: relative; overflow: hidden;
+    }
+    .build-page-card:hover { border-color: var(--border-accent); }
+    .build-page-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    }
+    .build-page-card.card-high::before { background: linear-gradient(90deg, var(--accent-green), #34D399); }
+    .build-page-card.card-mid::before { background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); }
+    .build-page-card.card-low::before { background: linear-gradient(90deg, var(--accent-orange), #FBBF24); }
+    .build-page-card.card-minimal::before { background: linear-gradient(90deg, var(--accent-red), var(--accent-orange)); }
+    .build-page-card.card-parked::before { background: linear-gradient(90deg, var(--text-muted), var(--text-muted)); }
+    .build-page-header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;
+    }
+    .build-page-header h4 {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.05rem; font-weight: 700;
+      color: var(--text-primary); letter-spacing: 1px; text-transform: uppercase;
+    }
+    .build-pct-badge {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 800;
+      padding: 0.15rem 0.6rem; border-radius: var(--radius-pill);
+    }
+    .build-pct-badge.pct-high { color: var(--accent-green); background: rgba(16,185,129,0.15); }
+    .build-pct-badge.pct-mid { color: var(--accent-blue); background: rgba(37,99,235,0.15); }
+    .build-pct-badge.pct-low { color: var(--accent-orange); background: rgba(249,115,22,0.15); }
+    .build-pct-badge.pct-minimal { color: var(--accent-red); background: rgba(239,68,68,0.15); }
+    .build-pct-badge.pct-parked { color: var(--text-muted); background: rgba(136,150,166,0.15); }
+    .build-detail-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.3rem 0; font-size: 0.82rem; border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .build-detail-row:last-child { border-bottom: none; }
+    .build-detail-label { color: var(--text-muted); }
+    .build-detail-value { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; color: var(--text-primary); }
+    .build-detail-value.val-done { color: var(--accent-green); }
+    .build-detail-value.val-partial { color: var(--accent-orange); }
+    .build-detail-value.val-missing { color: var(--accent-red); }
+    .build-detail-value.val-parked { color: var(--text-muted); }
+    .build-page-note {
+      margin-top: 0.6rem; font-size: 0.78rem; color: var(--text-muted); font-style: italic; line-height: 1.5;
+    }
+    .component-xref-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.82rem; }
+    .component-xref-table th {
+      padding: 0.55rem 0.75rem; font-family: 'Barlow Condensed', sans-serif; font-size: 0.68rem;
+      font-weight: 600; color: var(--text-muted); text-align: left; text-transform: uppercase;
+      letter-spacing: 1.5px; background: var(--primary-dark); border-bottom: 1px solid var(--border);
+    }
+    .component-xref-table td {
+      padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); color: var(--text-secondary);
+    }
+    .component-xref-table tr:hover td { background: var(--bg-card-hover); }
+    .component-xref-table .xref-name { color: var(--text-primary); font-weight: 500; }
+    .component-xref-table .xref-done { color: var(--accent-green); font-weight: 600; }
+    .component-xref-table .xref-missing { color: var(--accent-red); font-weight: 600; }
+    .infra-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .infra-chip {
+      display: flex; align-items: center; gap: 0.6rem; padding: 0.7rem 1rem;
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-btn);
+    }
+    .infra-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    .infra-dot.dot-green { background: var(--accent-green); box-shadow: 0 0 6px rgba(16,185,129,0.4); }
+    .infra-dot.dot-orange { background: var(--accent-orange); box-shadow: 0 0 6px rgba(249,115,22,0.4); }
+    .infra-dot.dot-red { background: var(--accent-red); box-shadow: 0 0 6px rgba(239,68,68,0.4); }
+    .infra-label { font-size: 0.82rem; color: var(--text-primary); font-weight: 500; }
+    .infra-sub { font-size: 0.72rem; color: var(--text-muted); }
+
     /* ===== STEP BLOCKS ===== */
     .steps { counter-reset: step; }
     .step {
@@ -528,7 +601,11 @@
     </a>
     <a href="#project-updates">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-      Updates <span class="badge badge-new" style="font-size:0.55rem; padding:0.1rem 0.5rem; margin-left:0.3rem">New</span>
+      Updates
+    </a>
+    <a href="#site-build">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20M5 20V8l7-5 7 5v12"/><path d="M9 20v-5h6v5"/></svg>
+      Site Build <span class="badge badge-new" style="font-size:0.55rem; padding:0.1rem 0.5rem; margin-left:0.3rem">New</span>
     </a>
     <a href="#schedule">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -1318,6 +1395,242 @@
         <li><div class="pri-num"></div><div><div class="pri-text"><strong>Clean up inner layers on completed pages</strong> &mdash; merch cards (<code style="color:var(--accent-red)">Frame 588/598/599/600</code>), logo groups, table rows</div><div class="pri-ref">Guide 1 &mdash; polish pass &mdash; ~30 min</div></div></li>
         <li><div class="pri-num"></div><div><div class="pri-text"><strong>Verify duplicate page archival</strong> &mdash; confirm old LMSC + FAQ versions are archived or prefixed</div><div class="pri-ref">Guide 6 &mdash; visual check in Figma page panel &mdash; ~10 min</div></div></li>
         <li><div class="pri-num"></div><div><div class="pri-text"><strong>Componentize sponsors-row, stats-table, results-table</strong> &mdash; identical structures across pages</div><div class="pri-ref">Guide 2 &mdash; optional but helpful &mdash; ~45 min</div></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== SITE BUILD ===== -->
+<section id="site-build" class="animate-in">
+  <div class="section-header">
+    <div class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20M5 20V8l7-5 7 5v12"/><path d="M9 20v-5h6v5"/></svg>
+      Site Build Progress &nbsp; <span class="badge badge-new">New</span>
+    </div>
+    <h2 class="section-title">Figma &rarr; Code &mdash; Page-by-Page Build Status</h2>
+    <p class="section-desc">Cross-references the Figma design file against the <a href="https://github.com/Mileage-Design/Matthew-Laprade" target="_blank" style="color:var(--accent-blue);text-decoration:underline">GitHub repository</a> to track which designed pages have been built into the WordPress theme. Theme version <strong>0.13.1</strong>.</p>
+    <div style="margin-top:0.75rem"><span class="update-date">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Last updated: April 22, 2026
+    </span></div>
+  </div>
+
+  <!-- Overall Build Progress -->
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Overall Build Progress</h3>
+      <div style="margin-top:0.5rem">
+        <div class="progress-row">
+          <span class="progress-label">Site Build (All Pages)</span>
+          <div class="progress-track"><div class="progress-fill low" style="width:38%"></div></div>
+          <span class="progress-pct">38%</span>
+        </div>
+        <div class="progress-row">
+          <span class="progress-label">Components Coded</span>
+          <div class="progress-track"><div class="progress-fill mid" style="width:71%"></div></div>
+          <span class="progress-pct">12 / 17</span>
+        </div>
+        <div class="progress-row">
+          <span class="progress-label">ACF Field Groups</span>
+          <div class="progress-track"><div class="progress-fill high" style="width:100%"></div></div>
+          <span class="progress-pct">9 / 9</span>
+        </div>
+        <div class="progress-row">
+          <span class="progress-label">Page Templates</span>
+          <div class="progress-track"><div class="progress-fill minimal" style="width:20%"></div></div>
+          <span class="progress-pct">1 / 5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Per-Page Build Cards -->
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Per-Page Build Status</h3>
+      <div class="build-summary-grid">
+
+        <!-- Homepage -->
+        <div class="build-page-card card-high">
+          <div class="build-page-header">
+            <h4>Homepage</h4>
+            <span class="build-pct-badge pct-high">75%</span>
+          </div>
+          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-done">templates/home.php</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">ACF Group</span><span class="build-detail-value val-done">group_homepage.json</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Components Built</span><span class="build-detail-value val-done">10 / 12</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">FC Router</span><span class="build-detail-value val-done">8 layouts wired</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Missing</span><span class="build-detail-value val-missing">upcoming-races, sponsors-grid</span></div>
+          <div class="build-page-note">Template and router functional. 4 existing components need three-tab / decorations retrofit.</div>
+        </div>
+
+        <!-- About -->
+        <div class="build-page-card card-low">
+          <div class="build-page-header">
+            <h4>About</h4>
+            <span class="build-pct-badge pct-low">35%</span>
+          </div>
+          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-missing">page-standard.php &mdash; NOT BUILT</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">ACF Group</span><span class="build-detail-value val-missing">Needs group_standard_page.json</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Components Built</span><span class="build-detail-value val-done">6 / 6</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Blocker</span><span class="build-detail-value val-missing">Standard Page template</span></div>
+          <div class="build-page-note">All needed component PHP files exist (hero, section-intro, overlay-text, feature-block, cta-banner, product-showcase). Blocked entirely on the Standard Page template + ACF group.</div>
+        </div>
+
+        <!-- Results -->
+        <div class="build-page-card card-low">
+          <div class="build-page-header">
+            <h4>Results</h4>
+            <span class="build-pct-badge pct-low">25%</span>
+          </div>
+          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-missing">page-standard.php &mdash; NOT BUILT</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">ACF Group</span><span class="build-detail-value val-missing">Needs group_standard_page.json</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Components Built</span><span class="build-detail-value val-done">3 / 5</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Missing</span><span class="build-detail-value val-missing">upcoming-races, key-tracks-list</span></div>
+          <div class="build-page-note">Blocked on Standard Page template. Two unique components also need building.</div>
+        </div>
+
+        <!-- LMSC -->
+        <div class="build-page-card card-minimal">
+          <div class="build-page-header">
+            <h4>LMSC (Pro Truck)</h4>
+            <span class="build-pct-badge pct-minimal">20%</span>
+          </div>
+          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-missing">single-racing_division.php &mdash; NOT BUILT</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">CPT</span><span class="build-detail-value val-done">racing_division registered + ACF fields</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Components Built</span><span class="build-detail-value val-partial">6 / 10</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Missing</span><span class="build-detail-value val-missing">upcoming-races, sponsors-grid, key-tracks-list, back-to-overview-cta</span></div>
+          <div class="build-page-note">CPT registered with ACF fields. No single page template. 4 component files not built yet.</div>
+        </div>
+
+        <!-- News -->
+        <div class="build-page-card card-parked">
+          <div class="build-page-header">
+            <h4>News (Blog)</h4>
+            <span class="build-pct-badge pct-parked">5%</span>
+          </div>
+          <div class="build-detail-row"><span class="build-detail-label">Archive Template</span><span class="build-detail-value val-parked">home.php (root) &mdash; PARKED</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Single Template</span><span class="build-detail-value val-parked">single.php &mdash; PARKED</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Components Built</span><span class="build-detail-value val-parked">1 / 4</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Status</span><span class="build-detail-value val-parked">Deferred &mdash; no Figma designs</span></div>
+          <div class="build-page-note">Explicitly parked. Only the hero component is available. Blog archive + single post templates not started. Waiting on Figma designs.</div>
+        </div>
+
+        <!-- Shop -->
+        <div class="build-page-card card-low">
+          <div class="build-page-header">
+            <h4>Shop (WooCommerce)</h4>
+            <span class="build-pct-badge pct-low">30%</span>
+          </div>
+          <div class="build-detail-row"><span class="build-detail-label">WC Support</span><span class="build-detail-value val-done">inc/woocommerce.php</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Product Card</span><span class="build-detail-value val-done">product-card.php built</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Template Overrides</span><span class="build-detail-value val-missing">woocommerce/ dir exists, no overrides</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Payment Gateway</span><span class="build-detail-value val-missing">Pending client decision</span></div>
+          <div class="build-page-note">Infrastructure stubs in place. No styled WooCommerce template overrides, no cart icon in nav, no payment gateway configured.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Component Cross-Reference -->
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Component Cross-Reference &mdash; Figma vs. Code</h3>
+      <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem">Maps each Figma design section to its WordPress implementation: PHP component file, ACF field group, and the pages where it appears in the Figma file.</p>
+      <div style="overflow-x:auto">
+      <table class="component-xref-table">
+        <thead>
+          <tr><th>Figma Section</th><th>PHP Component</th><th>ACF Group</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="xref-name">hero</td><td>parts/components/hero.php</td><td>group_component_hero.json</td><td class="xref-done">Built</td></tr>
+          <tr><td class="xref-name">section-intro</td><td>parts/components/section-intro.php</td><td>group_component_section_intro.json</td><td class="xref-done">Built</td></tr>
+          <tr><td class="xref-name">divisions-carousel</td><td>parts/components/divisions-grid.php</td><td>group_component_divisions_grid.json</td><td class="xref-done">Built</td></tr>
+          <tr><td class="xref-name">results-table</td><td>parts/components/latest-results.php</td><td>group_component_latest_results.json</td><td class="xref-done">Built</td></tr>
+          <tr><td class="xref-name">two-col-text-image</td><td>parts/components/overlay-text.php</td><td>group_component_overlay_text.json</td><td class="xref-done">Built</td></tr>
+          <tr><td class="xref-name">feature-block</td><td>parts/components/feature-block.php</td><td>group_component_feature_block.json</td><td class="xref-done">Built</td></tr>
+          <tr><td class="xref-name">cta-closing</td><td>parts/components/cta-banner.php</td><td>group_component_cta_banner.json</td><td class="xref-done">Built</td></tr>
+          <tr><td class="xref-name">merch-grid</td><td>parts/components/product-showcase.php</td><td>group_component_product_showcase.json</td><td class="xref-done">Built</td></tr>
+          <tr><td class="xref-name">product card</td><td>parts/components/product-card.php</td><td>&mdash; (WC product data)</td><td class="xref-done">Built</td></tr>
+          <tr><td class="xref-name">sponsors-row</td><td>parts/components/sponsors-marquee.php</td><td>&mdash; (zero ACF; CPT-driven)</td><td class="xref-done">Built</td></tr>
+          <tr><td class="xref-name">wordmark-marquee</td><td>parts/components/wordmark-marquee.php</td><td>&mdash; (static; zero ACF)</td><td class="xref-done">Built</td></tr>
+          <tr><td class="xref-name">chevron decoration</td><td>parts/components/decorations/chevron.php</td><td>group_component_decorations.json</td><td class="xref-done">Built</td></tr>
+          <tr><td class="xref-name">upcoming-races</td><td>&mdash;</td><td>&mdash;</td><td class="xref-missing">Not started</td></tr>
+          <tr><td class="xref-name">sponsors-grid</td><td>&mdash;</td><td>&mdash;</td><td class="xref-missing">Not started</td></tr>
+          <tr><td class="xref-name">key-tracks-list</td><td>&mdash;</td><td>&mdash;</td><td class="xref-missing">Not started</td></tr>
+          <tr><td class="xref-name">stats-table</td><td>&mdash;</td><td>&mdash;</td><td class="xref-missing">Not started</td></tr>
+          <tr><td class="xref-name">back-to-overview-cta</td><td>&mdash;</td><td>&mdash;</td><td class="xref-missing">Not started</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Infrastructure Status -->
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Infrastructure &amp; Global Systems</h3>
+      <div class="infra-grid">
+        <div class="infra-chip">
+          <span class="infra-dot dot-green"></span>
+          <div><div class="infra-label">header.php + footer.php</div><div class="infra-sub">Theme shell present</div></div>
+        </div>
+        <div class="infra-chip">
+          <span class="infra-dot dot-green"></span>
+          <div><div class="infra-label">Vite + Tailwind CSS 3</div><div class="infra-sub">Asset pipeline wired</div></div>
+        </div>
+        <div class="infra-chip">
+          <span class="infra-dot dot-green"></span>
+          <div><div class="infra-label">Site Essentials</div><div class="infra-sub">ACF options page built</div></div>
+        </div>
+        <div class="infra-chip">
+          <span class="infra-dot dot-green"></span>
+          <div><div class="infra-label">CPT: race</div><div class="infra-sub">Registered + ACF fields</div></div>
+        </div>
+        <div class="infra-chip">
+          <span class="infra-dot dot-green"></span>
+          <div><div class="infra-label">CPT: racing_division</div><div class="infra-sub">Registered + ACF fields</div></div>
+        </div>
+        <div class="infra-chip">
+          <span class="infra-dot dot-green"></span>
+          <div><div class="infra-label">CPT: sponsor</div><div class="infra-sub">Registered + ACF fields</div></div>
+        </div>
+        <div class="infra-chip">
+          <span class="infra-dot dot-green"></span>
+          <div><div class="infra-label">Swiper 11</div><div class="infra-sub">Conditional enqueue wired</div></div>
+        </div>
+        <div class="infra-chip">
+          <span class="infra-dot dot-orange"></span>
+          <div><div class="infra-label">WooCommerce</div><div class="infra-sub">Hooks present, no overrides</div></div>
+        </div>
+        <div class="infra-chip">
+          <span class="infra-dot dot-red"></span>
+          <div><div class="infra-label">Standard Page Template</div><div class="infra-sub">Not built &mdash; blocks 3 pages</div></div>
+        </div>
+        <div class="infra-chip">
+          <span class="infra-dot dot-red"></span>
+          <div><div class="infra-label">Single Division Template</div><div class="infra-sub">Not built &mdash; blocks LMSC</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Build Priority Queue -->
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Build Priority Queue</h3>
+      <ol class="priority-list">
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build page-standard.php template + ACF group</strong> &mdash; unblocks About, Results, and Sponsorship pages</div><div class="pri-ref">Immediate &mdash; highest-leverage item</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build upcoming-races component</strong> &mdash; needed on Homepage, Results, and all division pages</div><div class="pri-ref">Immediate &mdash; PHP + ACF field group</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build sponsors-grid component</strong> &mdash; needed on Homepage, About, and all division pages</div><div class="pri-ref">Immediate &mdash; PHP + ACF field group</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Three-tab retrofit</strong> &mdash; apply decorations clone + tab structure to hero, section-intro, divisions-grid, latest-results</div><div class="pri-ref">High &mdash; parallel to above</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build single-racing_division.php template</strong> &mdash; unblocks LMSC, Pro Truck, Modified pages</div><div class="pri-ref">High &mdash; after page-standard</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build key-tracks-list + stats-table components</strong> &mdash; needed on all division pages</div><div class="pri-ref">Medium</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>WooCommerce template overrides</strong> &mdash; styled archive, single product, cart</div><div class="pri-ref">Medium &mdash; pending client payment gateway decision</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Blog templates</strong> &mdash; home.php (root archive), single.php</div><div class="pri-ref">Deferred &mdash; parked pending Figma designs</div></div></li>
       </ol>
     </div>
   </div>
