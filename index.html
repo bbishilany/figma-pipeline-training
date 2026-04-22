@@ -176,7 +176,53 @@
     .badge-both { background: rgba(6,182,212,0.15); color: var(--accent-cyan); border: 1px solid rgba(6,182,212,0.3); }
     .badge-priority { background: rgba(239,68,68,0.15); color: var(--accent-red); border: 1px solid rgba(239,68,68,0.3); }
     .badge-updated { background: rgba(251,191,36,0.18); color: #FBBF24; border: 1px solid rgba(251,191,36,0.35); animation: pulse-update 2s ease-in-out 3; }
+    .badge-new { background: rgba(16,185,129,0.2); color: #10B981; border: 1px solid rgba(16,185,129,0.4); animation: pulse-new 1.5s ease-in-out 5; }
     @keyframes pulse-update { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+    @keyframes pulse-new { 0%,100% { opacity: 1; } 50% { opacity: 0.65; } }
+
+    /* ===== PROGRESS BARS ===== */
+    .progress-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.85rem; }
+    .progress-label {
+      min-width: 180px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem;
+      font-weight: 600; color: var(--text-primary); letter-spacing: 0.5px;
+    }
+    .progress-track {
+      flex: 1; height: 10px; background: rgba(255,255,255,0.06);
+      border-radius: 5px; overflow: hidden; position: relative;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 5px; transition: width 1s ease;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    }
+    .progress-fill.high { background: linear-gradient(90deg, var(--accent-green), #34D399); }
+    .progress-fill.mid { background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); }
+    .progress-fill.low { background: linear-gradient(90deg, var(--accent-orange), #FBBF24); }
+    .progress-fill.minimal { background: linear-gradient(90deg, var(--accent-red), var(--accent-orange)); }
+    .progress-pct {
+      min-width: 42px; text-align: right; font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem; font-weight: 700; color: var(--text-muted); letter-spacing: 0.5px;
+    }
+    .update-date {
+      display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.8rem;
+      background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.2);
+      border-radius: var(--radius-pill); font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem; font-weight: 600; color: var(--accent-blue);
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+    .page-status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+    .page-chip {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.6rem 1rem; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-btn); font-size: 0.85rem;
+    }
+    .page-chip .page-name { color: var(--text-primary); font-weight: 500; }
+    .page-chip .page-pct {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.82rem;
+    }
+    .page-chip .page-pct.pct-high { color: var(--accent-green); }
+    .page-chip .page-pct.pct-mid { color: var(--accent-blue); }
+    .page-chip .page-pct.pct-low { color: var(--accent-orange); }
+    .page-chip .page-pct.pct-minimal { color: var(--accent-red); }
 
     /* ===== GUIDE CARDS (hub) ===== */
     .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
@@ -479,6 +525,10 @@
     <a href="#guide-6">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
       6. Cleanup
+    </a>
+    <a href="#project-updates">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Updates <span class="badge badge-new" style="font-size:0.55rem; padding:0.1rem 0.5rem; margin-left:0.3rem">New</span>
     </a>
     <a href="#schedule">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -1113,6 +1163,162 @@
       <div class="callout" style="margin-top:1.5rem">
         <strong>How to archive:</strong> Create a separate Figma page called "Archive" or prefix old versions with <strong style="color:var(--accent-cyan)">_OLD -</strong>. Do NOT delete &mdash; Jorge may need to reference old explorations.
       </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== PROJECT UPDATES ===== -->
+<section id="project-updates" class="animate-in">
+  <div class="section-header">
+    <div class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Project Updates &nbsp; <span class="badge badge-new">New</span>
+    </div>
+    <h2 class="section-title">Progress Audit &mdash; Figma File Readiness</h2>
+    <p class="section-desc">Live progress tracking against each guide. Updated periodically by the Mileage team based on direct Figma file inspection via Claude Code MCP.</p>
+    <div style="margin-top:0.75rem"><span class="update-date">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Last updated: April 22, 2026
+    </span></div>
+  </div>
+
+  <!-- Overall Progress -->
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Overall Guide Progress</h3>
+      <div style="margin-top:0.5rem">
+        <div class="progress-row">
+          <span class="progress-label">1. Layer Naming</span>
+          <div class="progress-track"><div class="progress-fill mid" style="width:70%"></div></div>
+          <span class="progress-pct">70%</span>
+        </div>
+        <div class="progress-row">
+          <span class="progress-label">2. Components</span>
+          <div class="progress-track"><div class="progress-fill low" style="width:35%"></div></div>
+          <span class="progress-pct">35%</span>
+        </div>
+        <div class="progress-row">
+          <span class="progress-label">3. Variants</span>
+          <div class="progress-track"><div class="progress-fill minimal" style="width:10%"></div></div>
+          <span class="progress-pct">10%</span>
+        </div>
+        <div class="progress-row">
+          <span class="progress-label">4. Design Tokens</span>
+          <div class="progress-track"><div class="progress-fill high" style="width:90%"></div></div>
+          <span class="progress-pct">90%</span>
+        </div>
+        <div class="progress-row">
+          <span class="progress-label">5. Inventory</span>
+          <div class="progress-track"><div class="progress-fill high" style="width:100%"></div></div>
+          <span class="progress-pct">N/A</span>
+        </div>
+        <div class="progress-row">
+          <span class="progress-label">6. Duplicate Cleanup</span>
+          <div class="progress-track"><div class="progress-fill low" style="width:40%"></div></div>
+          <span class="progress-pct">~40%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Guide 1 Detail -->
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Guide 1: Layer Naming &mdash; Per-Page Breakdown</h3>
+      <p>Section-level naming is strong across most pages Mayo has touched. Inner layers (children inside sections) still have some generic <code style="color:var(--accent-red)">Frame NNN</code> names remaining.</p>
+      <div class="page-status-grid">
+        <div class="page-chip"><span class="page-name">Homepage</span><span class="page-pct pct-high">~90%</span></div>
+        <div class="page-chip"><span class="page-name">About</span><span class="page-pct pct-high">~85%</span></div>
+        <div class="page-chip"><span class="page-name">Results</span><span class="page-pct pct-high">~90%</span></div>
+        <div class="page-chip"><span class="page-name">News</span><span class="page-pct pct-high">~85%</span></div>
+        <div class="page-chip"><span class="page-name">Shop</span><span class="page-pct pct-mid">~75%</span></div>
+        <div class="page-chip"><span class="page-name">LMSC</span><span class="page-pct pct-minimal">~5%</span></div>
+        <div class="page-chip"><span class="page-name">Pro Truck</span><span class="page-pct pct-low">Unverified</span></div>
+        <div class="page-chip"><span class="page-name">Modified</span><span class="page-pct pct-low">Unverified</span></div>
+      </div>
+      <div class="callout" style="margin-top:1rem">
+        <strong>Key finding:</strong> The LMSC page is still almost entirely in auto-name state (<code style="color:var(--accent-red)">Frame 491</code>, <code style="color:var(--accent-red)">Frame 596</code>, <code style="color:var(--accent-red)">Frame 602</code>, etc.). This page needs the same treatment the Homepage, About, and Results pages received.
+      </div>
+    </div>
+  </div>
+
+  <!-- Guide 2 Detail -->
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Guide 2: Components</h3>
+      <table class="rename-table">
+        <thead><tr><th>Component</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="new-name">Main Nav Bar</td><td><strong style="color:var(--accent-green)">Done</strong></td><td class="what-is">Pre-existing &mdash; instanced across all pages</td></tr>
+          <tr><td class="new-name">Footer Component</td><td><strong style="color:var(--accent-green)">Done</strong></td><td class="what-is">Pre-existing &mdash; instanced across all pages</td></tr>
+          <tr><td class="new-name">Button Components</td><td><strong style="color:var(--accent-green)">Done</strong></td><td class="what-is">Pre-existing &mdash; Red Filled, Red Stroked, Arrow Down</td></tr>
+          <tr><td class="new-name">social-feed</td><td><strong style="color:var(--accent-green)">Done</strong></td><td class="what-is">New &mdash; Mayo componentized, instanced on About page</td></tr>
+          <tr><td class="new-name">divisions-carousel-section</td><td><strong style="color:var(--accent-green)">Done</strong></td><td class="what-is">New &mdash; Mayo componentized on Homepage</td></tr>
+          <tr><td class="new-name">hero-about</td><td><strong style="color:var(--accent-green)">Done</strong></td><td class="what-is">New &mdash; Mayo componentized, shows as instance</td></tr>
+          <tr><td class="new-name">Filter Toggle</td><td><strong style="color:var(--accent-green)">Done</strong></td><td class="what-is">New &mdash; instanced on News + Shop pages</td></tr>
+          <tr><td class="old-name">sponsors-row</td><td style="color:var(--accent-orange)">Not started</td><td class="what-is">Still separate frames per page</td></tr>
+          <tr><td class="old-name">stats-table</td><td style="color:var(--accent-orange)">Not started</td><td class="what-is">Still separate frames on division pages</td></tr>
+          <tr><td class="old-name">results-table</td><td style="color:var(--accent-orange)">Not started</td><td class="what-is">Still separate frames per page</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Guide 4 Detail -->
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Guide 4: Design Tokens &mdash; Standout Win</h3>
+      <div class="callout callout-green" style="margin-top:0">
+        <strong>Exceeded expectations.</strong> Mayo defined a comprehensive set of color styles, typography styles, and effects &mdash; well beyond the minimum ask of "6 color variables." Claude Code's <code>get_variable_defs</code> returns real, usable data for this file. <strong>The pipeline is unlocked for token extraction.</strong>
+      </div>
+      <table class="variant-table" style="margin-top:1rem">
+        <thead><tr><th>Token</th><th>Type</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td class="prop">Accent / Accent - Bright</td><td>Color</td><td class="val">#ED1C24</td></tr>
+          <tr><td class="prop">Dark</td><td>Color</td><td class="val">#1E1E1E</td></tr>
+          <tr><td class="prop">White</td><td>Color</td><td class="val">#FFFFFF</td></tr>
+          <tr><td class="prop">Heading 1</td><td>Typography</td><td class="val">Zalando Sans Expanded &middot; Bold Italic &middot; 81.5px</td></tr>
+          <tr><td class="prop">Heading 2</td><td>Typography</td><td class="val">Zalando Sans Expanded &middot; Bold Italic &middot; 50px</td></tr>
+          <tr><td class="prop">Heading 3</td><td>Typography</td><td class="val">Zalando Sans Expanded &middot; SemiBold &middot; 30px</td></tr>
+          <tr><td class="prop">Heading 4</td><td>Typography</td><td class="val">Zalando Sans Expanded &middot; Bold &middot; 20px</td></tr>
+          <tr><td class="prop">Body Text 1</td><td>Typography</td><td class="val">Roboto &middot; Regular &middot; 20px</td></tr>
+          <tr><td class="prop">Body Text 2</td><td>Typography</td><td class="val">Roboto &middot; SemiBold &middot; 12px</td></tr>
+          <tr><td class="prop">Button Text</td><td>Typography</td><td class="val">Zalando Sans Expanded &middot; Black &middot; 12px</td></tr>
+          <tr><td class="prop">Hover Drop Shadow</td><td>Effect</td><td class="val">#ED1C24 glow &middot; 29.7px radius</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Guide 6 Detail -->
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Guide 6: Duplicate Cleanup</h3>
+      <p>Pages have been renamed (Racing Overview &rarr; Results/News, FAQ &rarr; Shop), which suggests Mayo reviewed the duplicates. Full archive status could not be confirmed from the MCP &mdash; needs a visual check in Figma's page panel.</p>
+      <table class="rename-table" style="margin-top:0.75rem">
+        <thead><tr><th>Original Duplicate</th><th>Current State</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="what-is">Racing Overview (x2)</td><td>Now "Results" + "News" &mdash; differentiated</td><td><strong style="color:var(--accent-green)">Likely resolved</strong></td></tr>
+          <tr><td class="what-is">LMSC (x2)</td><td>One version confirmed at 249:1988</td><td><strong style="color:var(--accent-orange)">Needs verification</strong></td></tr>
+          <tr><td class="what-is">FAQ (x2)</td><td>One is now "Shop" &mdash; different content</td><td><strong style="color:var(--accent-orange)">Needs verification</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Next Steps -->
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Remaining Work &mdash; Priority Order</h3>
+      <ol class="priority-list">
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Rename LMSC page layers</strong> &mdash; still entirely in <code style="color:var(--accent-red)">Frame NNN</code> state</div><div class="pri-ref">Guide 1 &mdash; highest-impact gap &mdash; ~30 min</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Rename Pro Truck + Modified layers</strong> &mdash; could not verify, likely similar state to LMSC</div><div class="pri-ref">Guide 1 &mdash; division pages share the same section structure &mdash; ~45 min</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Clean up inner layers on completed pages</strong> &mdash; merch cards (<code style="color:var(--accent-red)">Frame 588/598/599/600</code>), logo groups, table rows</div><div class="pri-ref">Guide 1 &mdash; polish pass &mdash; ~30 min</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Verify duplicate page archival</strong> &mdash; confirm old LMSC + FAQ versions are archived or prefixed</div><div class="pri-ref">Guide 6 &mdash; visual check in Figma page panel &mdash; ~10 min</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Componentize sponsors-row, stats-table, results-table</strong> &mdash; identical structures across pages</div><div class="pri-ref">Guide 2 &mdash; optional but helpful &mdash; ~45 min</div></div></li>
+      </ol>
     </div>
   </div>
 </section>
