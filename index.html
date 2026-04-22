@@ -50,14 +50,15 @@
     /* ===== HEADER ===== */
     .site-header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      background: rgba(10,22,40,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(37,99,235,0.08);
+      background: rgba(6,14,28,0.97);
+      backdrop-filter: blur(14px);
+      border-bottom: 2px solid rgba(37,99,235,0.25);
       padding: 0 1.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
     }
     .header-inner {
       max-width: 1120px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between; height: 56px;
+      display: flex; align-items: center; justify-content: space-between; height: 50px;
     }
     .logo { display: flex; align-items: baseline; gap: 0.5rem; }
     .logo-brand {
@@ -71,7 +72,7 @@
 
     /* ===== HERO ===== */
     .hero {
-      background: var(--bg); color: #fff; position: relative; overflow: hidden; margin-top: 56px;
+      background: var(--bg); color: #fff; position: relative; overflow: hidden; margin-top: 50px;
     }
     .hero-bg {
       position: absolute; inset: 0;
@@ -116,9 +117,10 @@
 
     /* ===== NAV ===== */
     .nav {
-      position: sticky; top: 56px; z-index: 100;
-      background: rgba(10,22,40,0.92); backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(37,99,235,0.08);
+      position: sticky; top: 50px; z-index: 100;
+      background: rgba(8,18,34,0.96); backdrop-filter: blur(14px);
+      border-bottom: 2px solid rgba(37,99,235,0.15);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
     }
     .nav-rows {
       max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column;
@@ -128,15 +130,15 @@
       -webkit-overflow-scrolling: touch; scrollbar-width: none;
     }
     .nav-row::-webkit-scrollbar { display: none; }
-    .nav-row:first-child { border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .nav-row:first-child { border-bottom: 1px solid rgba(255,255,255,0.06); }
     .nav-row-label {
-      display: flex; align-items: center; padding: 0 1.1rem;
-      font-family: 'Barlow Condensed', sans-serif; font-size: 0.6rem; font-weight: 700;
-      color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase;
-      white-space: nowrap; opacity: 0.5;
+      display: flex; align-items: center; padding: 0 1rem;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.58rem; font-weight: 700;
+      color: var(--text-muted); letter-spacing: 2.5px; text-transform: uppercase;
+      white-space: nowrap; opacity: 0.45; min-width: 60px;
     }
     .nav a {
-      display: flex; align-items: center; gap: 0.4rem; padding: 0.7rem 1.1rem;
+      display: flex; align-items: center; gap: 0.4rem; padding: 0.65rem 1rem;
       text-decoration: none; color: var(--text-muted);
       font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; font-weight: 600;
       white-space: nowrap; letter-spacing: 2px; text-transform: uppercase;
