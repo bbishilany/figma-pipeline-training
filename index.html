@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Figma-to-Claude Code Pipeline &mdash; Training Guides</title>
+  <title>LaPrade Racing &mdash; Build Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -120,13 +120,23 @@
       background: rgba(10,22,40,0.92); backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(37,99,235,0.08);
     }
-    .nav-inner {
-      max-width: 1120px; margin: 0 auto; display: flex; overflow-x: auto;
+    .nav-rows {
+      max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column;
+    }
+    .nav-row {
+      display: flex; overflow-x: auto;
       -webkit-overflow-scrolling: touch; scrollbar-width: none;
     }
-    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-row::-webkit-scrollbar { display: none; }
+    .nav-row:first-child { border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .nav-row-label {
+      display: flex; align-items: center; padding: 0 1.1rem;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.6rem; font-weight: 700;
+      color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase;
+      white-space: nowrap; opacity: 0.5;
+    }
     .nav a {
-      display: flex; align-items: center; gap: 0.4rem; padding: 0.85rem 1.1rem;
+      display: flex; align-items: center; gap: 0.4rem; padding: 0.7rem 1.1rem;
       text-decoration: none; color: var(--text-muted);
       font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; font-weight: 600;
       white-space: nowrap; letter-spacing: 2px; text-transform: uppercase;
@@ -533,8 +543,8 @@
 <header class="site-header">
   <div class="header-inner">
     <div class="logo">
-      <span class="logo-brand">Mileage Design</span>
-      <span class="logo-sub">Pipeline Training</span>
+      <span class="logo-brand">LaPrade Racing</span>
+      <span class="logo-sub">Build Dashboard</span>
     </div>
   </div>
 </header>
@@ -548,8 +558,8 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
       Matthew Laprade Racing &mdash; Build Pipeline
     </div>
-    <h1>Figma-to-Claude Code<br><span>Pipeline Training</span></h1>
-    <p class="hero-sub">Six guides for preparing Figma files so Claude Code can build them automatically. Every example uses the actual Matthew Laprade Racing design file.</p>
+    <h1>LaPrade Racing<br><span>Build Dashboard</span></h1>
+    <p class="hero-sub">Project command center for the Matthew Laprade Racing website. Figma design prep, WordPress build progress, and planning &mdash; all in one place.</p>
     <div class="hero-meta">
       <div class="hero-meta-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
@@ -570,47 +580,53 @@
 
 <!-- ===== NAV ===== -->
 <nav class="nav">
-  <div class="nav-inner">
-    <a href="#overview">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-      Overview
-    </a>
-    <a href="#guide-1">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-      1. Rename
-    </a>
-    <a href="#guide-2">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      2. Components
-    </a>
-    <a href="#guide-3">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
-      3. Variants
-    </a>
-    <a href="#guide-4">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17" cy="15.5" r="2.5"/><circle cx="8.5" cy="15.5" r="2.5"/></svg>
-      4. Tokens
-    </a>
-    <a href="#guide-5">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
-      5. Inventory
-    </a>
-    <a href="#guide-6">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
-      6. Cleanup
-    </a>
-    <a href="#project-updates">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-      Updates
-    </a>
-    <a href="#site-build">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20M5 20V8l7-5 7 5v12"/><path d="M9 20v-5h6v5"/></svg>
-      Site Build <span class="badge badge-new" style="font-size:0.55rem; padding:0.1rem 0.5rem; margin-left:0.3rem">New</span>
-    </a>
-    <a href="#schedule">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-      Schedule
-    </a>
+  <div class="nav-rows">
+    <div class="nav-row">
+      <span class="nav-row-label">Guides</span>
+      <a href="#overview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Overview
+      </a>
+      <a href="#guide-1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        1. Rename
+      </a>
+      <a href="#guide-2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        2. Components
+      </a>
+      <a href="#guide-3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+        3. Variants
+      </a>
+      <a href="#guide-4">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17" cy="15.5" r="2.5"/><circle cx="8.5" cy="15.5" r="2.5"/></svg>
+        4. Tokens
+      </a>
+      <a href="#guide-5">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+        5. Inventory
+      </a>
+      <a href="#guide-6">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        6. Cleanup
+      </a>
+    </div>
+    <div class="nav-row">
+      <span class="nav-row-label">Project</span>
+      <a href="#project-updates">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        Figma Updates
+      </a>
+      <a href="#site-build">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20M5 20V8l7-5 7 5v12"/><path d="M9 20v-5h6v5"/></svg>
+        Site Build <span class="badge badge-new" style="font-size:0.55rem; padding:0.1rem 0.5rem; margin-left:0.3rem">New</span>
+      </a>
+      <a href="#schedule">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Schedule
+      </a>
+    </div>
   </div>
 </nav>
 
@@ -1681,8 +1697,8 @@
 <!-- ===== FOOTER ===== -->
 <footer>
   <div class="footer-brand">Mileage Design</div>
-  <p>Figma-to-Claude Code Pipeline Training &mdash; Matthew Laprade Racing</p>
-  <p>Generated from Figma file metadata &mdash; April 2026</p>
+  <p>LaPrade Racing &mdash; Build Dashboard</p>
+  <p>Figma prep + WordPress build tracking &mdash; April 2026</p>
 </footer>
 
 <script>
@@ -1693,7 +1709,7 @@ const obs = new IntersectionObserver((entries) => {
 document.querySelectorAll('.animate-in').forEach(el => obs.observe(el));
 
 // Active nav tracking
-const navLinks = document.querySelectorAll('.nav a');
+const navLinks = document.querySelectorAll('.nav-row a');
 const sections = [];
 navLinks.forEach(a => {
   const id = a.getAttribute('href').replace('#','');
