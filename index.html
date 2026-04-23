@@ -1292,8 +1292,8 @@
       <div style="margin-top:0.5rem">
         <div class="progress-row">
           <span class="progress-label">1. Layer Naming</span>
-          <div class="progress-track"><div class="progress-fill mid" style="width:70%"></div></div>
-          <span class="progress-pct">70%</span>
+          <div class="progress-track"><div class="progress-fill mid" style="width:80%"></div></div>
+          <span class="progress-pct">~80%</span>
         </div>
         <div class="progress-row">
           <span class="progress-label">2. Components</span>
@@ -1330,17 +1330,17 @@
       <h3>Guide 1: Layer Naming &mdash; Per-Page Breakdown</h3>
       <p>Section-level naming is strong across most pages Mayo has touched. Inner layers (children inside sections) still have some generic <code style="color:var(--accent-red)">Frame NNN</code> names remaining.</p>
       <div class="page-status-grid">
-        <div class="page-chip"><span class="page-name">Homepage</span><span class="page-pct pct-high">~90%</span></div>
-        <div class="page-chip"><span class="page-name">About</span><span class="page-pct pct-high">~85%</span></div>
-        <div class="page-chip"><span class="page-name">Results</span><span class="page-pct pct-high">~90%</span></div>
-        <div class="page-chip"><span class="page-name">News</span><span class="page-pct pct-high">~85%</span></div>
-        <div class="page-chip"><span class="page-name">Shop</span><span class="page-pct pct-mid">~75%</span></div>
-        <div class="page-chip"><span class="page-name">LMSC</span><span class="page-pct pct-minimal">~5%</span></div>
-        <div class="page-chip"><span class="page-name">Pro Truck</span><span class="page-pct pct-low">Unverified</span></div>
-        <div class="page-chip"><span class="page-name">Modified</span><span class="page-pct pct-low">Unverified</span></div>
+        <div class="page-chip"><span class="page-name">Homepage</span><span class="page-pct pct-high">92%</span></div>
+        <div class="page-chip"><span class="page-name">About</span><span class="page-pct pct-high">100%</span></div>
+        <div class="page-chip"><span class="page-name">Results</span><span class="page-pct pct-high">100%</span></div>
+        <div class="page-chip"><span class="page-name">News</span><span class="page-pct pct-high">100%</span></div>
+        <div class="page-chip"><span class="page-name">Shop</span><span class="page-pct pct-high">100%</span></div>
+        <div class="page-chip"><span class="page-name">LMSC</span><span class="page-pct pct-low">~30%</span></div>
+        <div class="page-chip"><span class="page-name">Pro Truck</span><span class="page-pct pct-minimal">No page</span></div>
+        <div class="page-chip"><span class="page-name">Modified</span><span class="page-pct pct-minimal">No page</span></div>
       </div>
-      <div class="callout" style="margin-top:1rem">
-        <strong>Key finding:</strong> The LMSC page is still almost entirely in auto-name state (<code style="color:var(--accent-red)">Frame 491</code>, <code style="color:var(--accent-red)">Frame 596</code>, <code style="color:var(--accent-red)">Frame 602</code>, etc.). This page needs the same treatment the Homepage, About, and Results pages received.
+      <div class="callout callout-red" style="margin-top:1rem">
+        <strong>Critical finding:</strong> Pro Truck and Modified pages <strong>do not exist in the Figma file</strong>. Mayo needs to create these pages before any naming or build work can happen. LMSC is at ~30% &mdash; some sections named but many still in <code style="color:var(--accent-red)">Frame NNN</code> state.
       </div>
     </div>
   </div>
@@ -1414,8 +1414,8 @@
     <div class="card-body">
       <h3>Remaining Work &mdash; Priority Order</h3>
       <ol class="priority-list">
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Rename LMSC page layers</strong> &mdash; still entirely in <code style="color:var(--accent-red)">Frame NNN</code> state</div><div class="pri-ref">Guide 1 &mdash; highest-impact gap &mdash; ~30 min</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Rename Pro Truck + Modified layers</strong> &mdash; could not verify, likely similar state to LMSC</div><div class="pri-ref">Guide 1 &mdash; division pages share the same section structure &mdash; ~45 min</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Create Pro Truck + Modified pages</strong> &mdash; these pages <strong style="color:var(--accent-red)">do not exist</strong> in the Figma file</div><div class="pri-ref">BLOCKER &mdash; Jorge cannot build what doesn't exist in Figma &mdash; ~2-3 hours each</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Rename LMSC page layers</strong> &mdash; at ~30%, many sections still in <code style="color:var(--accent-red)">Frame NNN</code> state</div><div class="pri-ref">Guide 1 &mdash; highest-impact gap on existing pages &mdash; ~30 min</div></div></li>
         <li><div class="pri-num"></div><div><div class="pri-text"><strong>Clean up inner layers on completed pages</strong> &mdash; merch cards (<code style="color:var(--accent-red)">Frame 588/598/599/600</code>), logo groups, table rows</div><div class="pri-ref">Guide 1 &mdash; polish pass &mdash; ~30 min</div></div></li>
         <li><div class="pri-num"></div><div><div class="pri-text"><strong>Verify duplicate page archival</strong> &mdash; confirm old LMSC + FAQ versions are archived or prefixed</div><div class="pri-ref">Guide 6 &mdash; visual check in Figma page panel &mdash; ~10 min</div></div></li>
         <li><div class="pri-num"></div><div><div class="pri-text"><strong>Componentize sponsors-row, stats-table, results-table</strong> &mdash; identical structures across pages</div><div class="pri-ref">Guide 2 &mdash; optional but helpful &mdash; ~45 min</div></div></li>
@@ -1431,10 +1431,10 @@
   <div class="section-header">
     <div class="section-label">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20M5 20V8l7-5 7 5v12"/><path d="M9 20v-5h6v5"/></svg>
-      Site Build Progress &nbsp; <span class="badge badge-new">New</span>
+      Site Build Progress
     </div>
     <h2 class="section-title">Figma &rarr; Code &mdash; Page-by-Page Build Status</h2>
-    <p class="section-desc">Cross-references the Figma design file against the <a href="https://github.com/Mileage-Design/Matthew-Laprade" target="_blank" style="color:var(--accent-blue);text-decoration:underline">GitHub repository</a> to track which designed pages have been built into the WordPress theme. Theme version <strong>0.13.1</strong>.</p>
+    <p class="section-desc">Cross-references the Figma design file against the <a href="https://github.com/Mileage-Design/Matthew-Laprade" target="_blank" style="color:var(--accent-blue);text-decoration:underline">GitHub repository</a> to track which designed pages have been built into the WordPress theme. Theme version <strong>0.14.0</strong>.</p>
     <div style="margin-top:0.75rem"><span class="update-date">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
       Last updated: April 22, 2026
@@ -1448,18 +1448,18 @@
       <div style="margin-top:0.5rem">
         <div class="progress-row">
           <span class="progress-label">Site Build (All Pages)</span>
-          <div class="progress-track"><div class="progress-fill low" style="width:38%"></div></div>
-          <span class="progress-pct">38%</span>
+          <div class="progress-track"><div class="progress-fill mid" style="width:45%"></div></div>
+          <span class="progress-pct">~45%</span>
         </div>
         <div class="progress-row">
           <span class="progress-label">Components Coded</span>
-          <div class="progress-track"><div class="progress-fill mid" style="width:71%"></div></div>
-          <span class="progress-pct">12 / 17</span>
+          <div class="progress-track"><div class="progress-fill high" style="width:82%"></div></div>
+          <span class="progress-pct">14 / 17</span>
         </div>
         <div class="progress-row">
           <span class="progress-label">ACF Field Groups</span>
           <div class="progress-track"><div class="progress-fill high" style="width:100%"></div></div>
-          <span class="progress-pct">9 / 9</span>
+          <span class="progress-pct">15 total</span>
         </div>
         <div class="progress-row">
           <span class="progress-label">Page Templates</span>
@@ -1479,15 +1479,15 @@
         <!-- Homepage -->
         <div class="build-page-card card-high">
           <div class="build-page-header">
-            <h4>Homepage</h4>
-            <span class="build-pct-badge pct-high">75%</span>
+            <h4>Homepage <span style="color:var(--accent-green); font-size:0.7rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-left:0.5rem; background:rgba(16,185,129,0.15); padding:0.15rem 0.5rem; border-radius:var(--radius-pill);">FC CLOSED</span></h4>
+            <span class="build-pct-badge pct-high">100%</span>
           </div>
           <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-done">templates/home.php</span></div>
           <div class="build-detail-row"><span class="build-detail-label">ACF Group</span><span class="build-detail-value val-done">group_homepage.json</span></div>
-          <div class="build-detail-row"><span class="build-detail-label">Components Built</span><span class="build-detail-value val-done">10 / 12</span></div>
-          <div class="build-detail-row"><span class="build-detail-label">FC Router</span><span class="build-detail-value val-done">8 layouts wired</span></div>
-          <div class="build-detail-row"><span class="build-detail-label">Missing</span><span class="build-detail-value val-missing">upcoming-races, sponsors-grid</span></div>
-          <div class="build-page-note">Template and router functional. 4 existing components need three-tab / decorations retrofit.</div>
+          <div class="build-detail-row"><span class="build-detail-label">Components Built</span><span class="build-detail-value val-done">10 / 10 sections wired</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">FC Router</span><span class="build-detail-value val-done">All layouts wired end-to-end</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Version</span><span class="build-detail-value val-done">v0.14.0 &mdash; April 23</span></div>
+          <div class="build-page-note">Homepage functional complete. All 10 sections built and routed. data-table component covers upcoming-races. Sponsors marquee live. QA + polish remaining.</div>
         </div>
 
         <!-- About -->
@@ -1524,9 +1524,10 @@
           </div>
           <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-missing">single-racing_division.php &mdash; NOT BUILT</span></div>
           <div class="build-detail-row"><span class="build-detail-label">CPT</span><span class="build-detail-value val-done">racing_division registered + ACF fields</span></div>
-          <div class="build-detail-row"><span class="build-detail-label">Components Built</span><span class="build-detail-value val-partial">6 / 10</span></div>
-          <div class="build-detail-row"><span class="build-detail-label">Missing</span><span class="build-detail-value val-missing">upcoming-races, sponsors-grid, key-tracks-list, back-to-overview-cta</span></div>
-          <div class="build-page-note">CPT registered with ACF fields. No single page template. 4 component files not built yet.</div>
+          <div class="build-detail-row"><span class="build-detail-label">Components Built</span><span class="build-detail-value val-partial">8 / 10</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Missing</span><span class="build-detail-value val-missing">key-tracks-list, back-to-overview-cta</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Figma</span><span class="build-detail-value val-missing">LMSC only &mdash; Pro Truck + Modified pages don't exist</span></div>
+          <div class="build-page-note">CPT registered with ACF fields. data-table covers upcoming-races + stats. No single page template. Figma gap: Pro Truck and Modified pages need to be created by Mayo.</div>
         </div>
 
         <!-- News -->
@@ -1550,7 +1551,7 @@
           </div>
           <div class="build-detail-row"><span class="build-detail-label">WC Support</span><span class="build-detail-value val-done">inc/woocommerce.php</span></div>
           <div class="build-detail-row"><span class="build-detail-label">Product Card</span><span class="build-detail-value val-done">product-card.php built</span></div>
-          <div class="build-detail-row"><span class="build-detail-label">Template Overrides</span><span class="build-detail-value val-missing">woocommerce/ dir exists, no overrides</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Template Overrides</span><span class="build-detail-value val-partial">single-product.php exists; no archive override</span></div>
           <div class="build-detail-row"><span class="build-detail-label">Payment Gateway</span><span class="build-detail-value val-missing">Pending client decision</span></div>
           <div class="build-page-note">Infrastructure stubs in place. No styled WooCommerce template overrides, no cart icon in nav, no payment gateway configured.</div>
         </div>
@@ -1582,10 +1583,10 @@
           <tr><td class="xref-name">sponsors-row</td><td>parts/components/sponsors-marquee.php</td><td>&mdash; (zero ACF; CPT-driven)</td><td class="xref-done">Built</td></tr>
           <tr><td class="xref-name">wordmark-marquee</td><td>parts/components/wordmark-marquee.php</td><td>&mdash; (static; zero ACF)</td><td class="xref-done">Built</td></tr>
           <tr><td class="xref-name">chevron decoration</td><td>parts/components/decorations/chevron.php</td><td>group_component_decorations.json</td><td class="xref-done">Built</td></tr>
-          <tr><td class="xref-name">upcoming-races</td><td>&mdash;</td><td>&mdash;</td><td class="xref-missing">Not started</td></tr>
+          <tr><td class="xref-name">upcoming-races</td><td>parts/components/data-table.php</td><td>group_component_data_table.json</td><td class="xref-done">Built (generic)</td></tr>
+          <tr><td class="xref-name">stats-table</td><td>parts/components/data-table.php</td><td>group_component_data_table.json</td><td class="xref-done">Built (generic)</td></tr>
           <tr><td class="xref-name">sponsors-grid</td><td>&mdash;</td><td>&mdash;</td><td class="xref-missing">Not started</td></tr>
           <tr><td class="xref-name">key-tracks-list</td><td>&mdash;</td><td>&mdash;</td><td class="xref-missing">Not started</td></tr>
-          <tr><td class="xref-name">stats-table</td><td>&mdash;</td><td>&mdash;</td><td class="xref-missing">Not started</td></tr>
           <tr><td class="xref-name">back-to-overview-cta</td><td>&mdash;</td><td>&mdash;</td><td class="xref-missing">Not started</td></tr>
         </tbody>
       </table>
@@ -1628,7 +1629,7 @@
         </div>
         <div class="infra-chip">
           <span class="infra-dot dot-orange"></span>
-          <div><div class="infra-label">WooCommerce</div><div class="infra-sub">Hooks present, no overrides</div></div>
+          <div><div class="infra-label">WooCommerce</div><div class="infra-sub">Hooks + single-product override; no styled archive</div></div>
         </div>
         <div class="infra-chip">
           <span class="infra-dot dot-red"></span>
@@ -1647,14 +1648,13 @@
     <div class="card-body">
       <h3>Build Priority Queue</h3>
       <ol class="priority-list">
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build page-standard.php template + ACF group</strong> &mdash; unblocks About, Results, and Sponsorship pages</div><div class="pri-ref">Immediate &mdash; highest-leverage item</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build upcoming-races component</strong> &mdash; needed on Homepage, Results, and all division pages</div><div class="pri-ref">Immediate &mdash; PHP + ACF field group</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build sponsors-grid component</strong> &mdash; needed on Homepage, About, and all division pages</div><div class="pri-ref">Immediate &mdash; PHP + ACF field group</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Three-tab retrofit</strong> &mdash; apply decorations clone + tab structure to hero, section-intro, divisions-grid, latest-results</div><div class="pri-ref">High &mdash; parallel to above</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build single-racing_division.php template</strong> &mdash; unblocks LMSC, Pro Truck, Modified pages</div><div class="pri-ref">High &mdash; after page-standard</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build key-tracks-list + stats-table components</strong> &mdash; needed on all division pages</div><div class="pri-ref">Medium</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>WooCommerce template overrides</strong> &mdash; styled archive, single product, cart</div><div class="pri-ref">Medium &mdash; pending client payment gateway decision</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Blog templates</strong> &mdash; home.php (root archive), single.php</div><div class="pri-ref">Deferred &mdash; parked pending Figma designs</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build page-standard.php template + ACF group</strong> &mdash; unblocks About, Results, Sponsorship, Contact, Schedule</div><div class="pri-ref">Immediate &mdash; highest-leverage item &mdash; 3+ pages waiting</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build single-racing_division.php template</strong> &mdash; unblocks LMSC page (Pro Truck + Modified waiting on Figma)</div><div class="pri-ref">Immediate &mdash; after page-standard</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build sponsors-grid component</strong> &mdash; needed on division pages and sponsors overview</div><div class="pri-ref">High &mdash; PHP + ACF field group</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build key-tracks-list component</strong> &mdash; needed on all division pages</div><div class="pri-ref">High</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Interior page builds</strong> &mdash; About first (all components exist), then Results, Sponsorship</div><div class="pri-ref">Medium &mdash; unblocked once page-standard.php exists</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>WooCommerce template overrides</strong> &mdash; styled archive, cart; single-product override exists</div><div class="pri-ref">Medium &mdash; pending client payment gateway decision</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Blog templates</strong> &mdash; archive + single.php</div><div class="pri-ref">Deferred &mdash; parked pending Figma designs</div></div></li>
       </ol>
     </div>
   </div>
@@ -1669,32 +1669,66 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
       Schedule
     </div>
-    <h2 class="section-title">Priority Order</h2>
-    <p class="section-desc">Who does what, and when.</p>
+    <h2 class="section-title">Current Priorities &mdash; By Teammate</h2>
+    <p class="section-desc">Based on live Figma MCP inspection and GitHub repo analysis. Updated April 22, 2026.</p>
   </div>
 
+  <!-- Status Summary -->
   <div class="content-block card">
     <div class="card-body">
-      <h3>Mayo's Priority Order</h3>
-      <ol class="priority-list">
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Rename remaining page layers</strong> &mdash; LMSC, Pro Truck, Modified still need attention</div><div class="pri-ref">Guide 1 &mdash; division pages &mdash; ~45 min</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Verify style coverage</strong> &mdash; spot-check that color &amp; text styles are applied consistently <span class="badge badge-updated" style="margin-left:0.5rem; font-size:0.6rem">Updated</span></div><div class="pri-ref">Guide 4 &mdash; 15 min</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Rename remaining page layers</strong> &mdash; About, division pages, inner pages</div><div class="pri-ref">Guide 1 &mdash; rest of file &mdash; ~1.5 hours</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Add components for truly identical elements only</strong> &mdash; sponsors-row, stats-table, results-table <span class="badge badge-updated" style="margin-left:0.5rem; font-size:0.6rem">Updated</span></div><div class="pri-ref">Guide 2 &mdash; ~45 min (reduced from 3 hours)</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Clean up duplicates</strong> &mdash; archive old versions of 3 duplicate pages</div><div class="pri-ref">Guide 6 &mdash; 30 min</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Add variants</strong> &mdash; stretch goal, start with hero component</div><div class="pri-ref">Guide 3 &mdash; ~1 hour per component</div></div></li>
-      </ol>
+      <h3>Where We Are</h3>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-top:0.75rem">
+        <div style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); border-radius:var(--radius-card); padding:1rem">
+          <div style="font-size:0.7rem; color:var(--accent-green); text-transform:uppercase; letter-spacing:1px; font-weight:600; margin-bottom:0.25rem">Completed</div>
+          <div style="font-size:0.9rem">Homepage FC closed (v0.14.0). 14 of 17 components built. 15 ACF field groups. All Homepage sections wired end-to-end.</div>
+        </div>
+        <div style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.2); border-radius:var(--radius-card); padding:1rem">
+          <div style="font-size:0.7rem; color:var(--accent-red); text-transform:uppercase; letter-spacing:1px; font-weight:600; margin-bottom:0.25rem">Blockers</div>
+          <div style="font-size:0.9rem">Pro Truck + Modified pages <strong>don't exist in Figma</strong>. page-standard.php not built (blocks 5 interior pages). single-racing_division.php not built (blocks LMSC).</div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="content-block card">
     <div class="card-body">
-      <h3>Jorge's Priority Order</h3>
+      <h3>Mayo (Figma Designer) &mdash; Priority Order</h3>
       <ol class="priority-list">
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Read Guide 5</strong> &mdash; understand the 27-component inventory</div><div class="pri-ref">Reference &mdash; 15 min</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build navbar, footer, buttons</strong> &mdash; global components</div><div class="pri-ref">Today</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build homepage</strong> &mdash; sections top to bottom</div><div class="pri-ref">Monday &mdash; needs Mayo's renamed layers</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Cross-reference heat map</strong> &mdash; see what's already done for inner pages</div><div class="pri-ref">Guide 5 &mdash; after homepage</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Create Pro Truck page in Figma</strong> &mdash; this page does not exist. Jorge cannot build what isn't designed.</div><div class="pri-ref">BLOCKER &mdash; ~2-3 hours &mdash; can clone LMSC structure</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Create Modified page in Figma</strong> &mdash; also does not exist. Same division-page structure as Pro Truck + LMSC.</div><div class="pri-ref">BLOCKER &mdash; ~2-3 hours &mdash; can clone LMSC structure</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Name LMSC page layers</strong> &mdash; at ~30%. Many sections still in <code style="color:var(--accent-red)">Frame NNN</code> state.</div><div class="pri-ref">Guide 1 &mdash; ~30 min</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Clean up inner layers</strong> &mdash; merch cards, logo groups, table rows on completed pages (Homepage 92%, but inner layers need polish)</div><div class="pri-ref">Guide 1 &mdash; polish pass &mdash; ~30 min</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Componentize sponsors-row, stats-table, results-table</strong> &mdash; identical structures across division pages</div><div class="pri-ref">Guide 2 &mdash; optional but helpful &mdash; ~45 min</div></div></li>
+      </ol>
+      <div class="callout callout-green" style="margin-top:1rem">
+        <strong>What's going well:</strong> About, Results, News, and Shop pages are at 100% top-level naming. Design tokens are comprehensive. 7 components already instanced. The big gap is the two missing pages.
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Jorge (WordPress Developer) &mdash; Priority Order</h3>
+      <ol class="priority-list">
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build page-standard.php + ACF group</strong> &mdash; unblocks About, Results, Sponsorship, Contact, and Schedule pages</div><div class="pri-ref">Immediate &mdash; highest-leverage item &mdash; 5 pages waiting</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build single-racing_division.php template</strong> &mdash; unblocks LMSC page (Pro Truck + Modified waiting on Mayo's Figma pages)</div><div class="pri-ref">Immediate &mdash; after page-standard</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build About page</strong> &mdash; all 6 components already exist (hero, section-intro, overlay-text, feature-block, cta-banner, product-showcase). Pure assembly.</div><div class="pri-ref">High &mdash; first interior page build once template exists</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build sponsors-grid + key-tracks-list components</strong> &mdash; needed for division pages and sponsors overview</div><div class="pri-ref">High &mdash; 3 remaining components of 17</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>WooCommerce template overrides</strong> &mdash; styled archive, cart; single-product override exists</div><div class="pri-ref">Medium &mdash; pending client payment gateway decision</div></div></li>
+      </ol>
+      <div class="callout callout-green" style="margin-top:1rem">
+        <strong>What's going well:</strong> Homepage v0.14.0 FC closed with all 10 sections. data-table generic primitive replaces 3 separate spec entries. 4 new components shipped since baseline (cta-banner, data-table, feature-block, product-card).
+      </div>
+    </div>
+  </div>
+
+  <div class="content-block card">
+    <div class="card-body">
+      <h3>Claude Code &mdash; Next Steps</h3>
+      <ol class="priority-list">
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>QA the Homepage build</strong> &mdash; compare v0.14.0 against the Figma homepage design pixel-by-pixel via MCP screenshot</div><div class="pri-ref">Available now &mdash; Homepage FC is closed</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Assist with page-standard.php</strong> &mdash; can build the template + ACF group from the Figma About page via MCP</div><div class="pri-ref">When Jorge is ready</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Extract tokens for interior pages</strong> &mdash; design tokens are comprehensive, ready for automated extraction</div><div class="pri-ref">Ongoing &mdash; unblocked</div></div></li>
       </ol>
     </div>
   </div>
