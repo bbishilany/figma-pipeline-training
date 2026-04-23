@@ -286,6 +286,25 @@
     .hub-tile.tile-red .hub-tile-cta { color: var(--accent-red); }
     .hub-tile-cta svg { width: 14px; height: 14px; transition: transform 0.2s ease; }
     .hub-tile:hover .hub-tile-cta svg { transform: translateX(4px); }
+    .hub-tile-pct {
+      position: absolute; top: 1.25rem; right: 1.5rem;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1.6rem; font-weight: 800;
+      line-height: 1; letter-spacing: -0.5px; opacity: 0.9;
+    }
+    .hub-tile-pct.pct-high { color: var(--accent-green); }
+    .hub-tile-pct.pct-mid { color: var(--accent-blue); }
+    .hub-tile-pct.pct-low { color: var(--accent-orange); }
+    .hub-tile-pct.pct-minimal { color: var(--accent-red); }
+    .hub-tile-progress {
+      height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; margin-top: 0.5rem; overflow: hidden;
+    }
+    .hub-tile-progress-fill {
+      height: 100%; border-radius: 2px; transition: width 0.4s ease;
+    }
+    .hub-tile-progress-fill.fill-high { background: var(--accent-green); }
+    .hub-tile-progress-fill.fill-mid { background: var(--accent-blue); }
+    .hub-tile-progress-fill.fill-low { background: var(--accent-orange); }
+    .hub-tile-progress-fill.fill-minimal { background: var(--accent-red); }
 
     /* ===== CONTENT BLOCKS ===== */
     .content-block { margin-bottom: 1.5rem; }
@@ -654,9 +673,11 @@
   <div class="hub-grid">
     <div class="card hub-tile tile-red" onclick="document.getElementById('guide-1').scrollIntoView({behavior:'smooth'})">
       <div class="hub-tile-body">
+        <span class="hub-tile-pct pct-mid">78%</span>
         <div class="hub-tile-num">Guide 01 &mdash; Highest Impact</div>
         <h3>Rename Every Layer</h3>
         <p>Homepage, About, Results, News, Shop &mdash; done. Late Model Stock Car at 20%. Pro Truck + Modified pages don't exist yet.</p>
+        <div class="hub-tile-progress"><div class="hub-tile-progress-fill fill-mid" style="width:78%"></div></div>
         <div class="hub-tile-meta">
           <span class="badge badge-mayo">Mayo</span>
           <span class="badge badge-updated">In Progress</span>
@@ -670,12 +691,14 @@
 
     <div class="card hub-tile tile-purple" onclick="document.getElementById('guide-2').scrollIntoView({behavior:'smooth'})">
       <div class="hub-tile-body">
+        <span class="hub-tile-pct pct-mid">70%</span>
         <div class="hub-tile-num">Guide 02 &mdash; Reusability</div>
         <h3>Components &mdash; Only What's Truly Identical</h3>
-        <p>Navbar, footer, and buttons are already proper components. Only add new components for elements that repeat with the <strong>exact same structure</strong>. Sections with small variations (extra button, different subheadline) stay as well-named frames.</p>
+        <p>7 of 10 target components instanced. Remaining: sponsors-row, stats-table, results-table.</p>
+        <div class="hub-tile-progress"><div class="hub-tile-progress-fill fill-mid" style="width:70%"></div></div>
         <div class="hub-tile-meta">
           <span class="badge badge-mayo">Mayo</span>
-          <span class="badge badge-updated">Updated</span>
+          <span class="badge badge-updated">In Progress</span>
         </div>
         <div class="hub-tile-cta">
           Jump to Guide
@@ -686,11 +709,14 @@
 
     <div class="card hub-tile" onclick="document.getElementById('guide-3').scrollIntoView({behavior:'smooth'})">
       <div class="hub-tile-body">
+        <span class="hub-tile-pct pct-minimal">10%</span>
         <div class="hub-tile-num">Guide 03 &mdash; Automation</div>
         <h3>Add Variants &amp; Properties</h3>
-        <p>Variants let Claude Code generate a single component file with conditional logic instead of separate files for each version. One hero component, four looks.</p>
+        <p>Stretch goal. No variants created yet. Scoped down to stats-table, results-table, sponsors-row only.</p>
+        <div class="hub-tile-progress"><div class="hub-tile-progress-fill fill-minimal" style="width:10%"></div></div>
         <div class="hub-tile-meta">
           <span class="badge badge-mayo">Mayo</span>
+          <span class="badge" style="background:rgba(255,255,255,0.06); color:var(--text-muted)">Not Started</span>
         </div>
         <div class="hub-tile-cta">
           Jump to Guide
@@ -701,12 +727,14 @@
 
     <div class="card hub-tile tile-green" onclick="document.getElementById('guide-4').scrollIntoView({behavior:'smooth'})">
       <div class="hub-tile-body">
+        <span class="hub-tile-pct pct-high">90%</span>
         <div class="hub-tile-num">Guide 04 &mdash; Quick Win</div>
         <h3>Verify Your Design Styles</h3>
-        <p>Your existing color styles and text styles are exactly what we need. Claude Code reads the values from applied styles. Variables are optional &mdash; and can't handle gradients or blend modes anyway. 15 minutes to verify coverage.</p>
+        <p>Color styles, text styles, and effects all defined. Exceeded expectations. Just needs a spot-check for detached styles across pages.</p>
+        <div class="hub-tile-progress"><div class="hub-tile-progress-fill fill-high" style="width:90%"></div></div>
         <div class="hub-tile-meta">
           <span class="badge badge-mayo">Mayo</span>
-          <span class="badge badge-updated">Updated</span>
+          <span class="badge" style="background:rgba(16,185,129,0.15); color:var(--accent-green)">Nearly Done</span>
         </div>
         <div class="hub-tile-cta">
           Jump to Guide
@@ -717,11 +745,14 @@
 
     <div class="card hub-tile tile-orange" onclick="document.getElementById('guide-5').scrollIntoView({behavior:'smooth'})">
       <div class="hub-tile-body">
+        <span class="hub-tile-pct pct-high">82%</span>
         <div class="hub-tile-num">Guide 05 &mdash; Build Reference</div>
         <h3>Component Inventory</h3>
-        <p>The full 27-component heat map across all 14 pages. Homepage is complete (FC closed). Interior pages next.</p>
+        <p>14 of 17 components coded. Homepage FC closed. Interior pages next &mdash; blocked on page-standard.php template.</p>
+        <div class="hub-tile-progress"><div class="hub-tile-progress-fill fill-high" style="width:82%"></div></div>
         <div class="hub-tile-meta">
           <span class="badge badge-jorge">Jorge</span>
+          <span class="badge badge-updated">In Progress</span>
         </div>
         <div class="hub-tile-cta">
           Jump to Guide
@@ -732,9 +763,11 @@
 
     <div class="card hub-tile tile-cyan" onclick="document.getElementById('guide-6').scrollIntoView({behavior:'smooth'})">
       <div class="hub-tile-body">
+        <span class="hub-tile-pct pct-low">40%</span>
         <div class="hub-tile-num">Guide 06 &mdash; Housekeeping</div>
         <h3>Clean Up Duplicates</h3>
-        <p>Racing Overview duplicates likely resolved (now Results + News). LMSC and FAQ duplicate status needs visual verification in Figma.</p>
+        <p>Racing Overview duplicates resolved (now Results + News). LMSC and FAQ duplicate status needs visual verification in Figma.</p>
+        <div class="hub-tile-progress"><div class="hub-tile-progress-fill fill-low" style="width:40%"></div></div>
         <div class="hub-tile-meta">
           <span class="badge badge-mayo">Mayo</span>
           <span class="badge badge-updated">Partially Done</span>
