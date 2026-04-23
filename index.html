@@ -656,10 +656,10 @@
       <div class="hub-tile-body">
         <div class="hub-tile-num">Guide 01 &mdash; Highest Impact</div>
         <h3>Rename Every Layer</h3>
-        <p>Almost every section is named "Frame 491", "Frame 602", etc. Claude Code can't generate meaningful component filenames from auto-generated names.</p>
+        <p>Homepage, About, Results, News, Shop &mdash; done. Late Model Stock Car at 20%. Pro Truck + Modified pages don't exist yet.</p>
         <div class="hub-tile-meta">
           <span class="badge badge-mayo">Mayo</span>
-          <span class="badge badge-priority">Start Here</span>
+          <span class="badge badge-updated">In Progress</span>
         </div>
         <div class="hub-tile-cta">
           Jump to Guide
@@ -719,7 +719,7 @@
       <div class="hub-tile-body">
         <div class="hub-tile-num">Guide 05 &mdash; Build Reference</div>
         <h3>Component Inventory</h3>
-        <p>The full 27-component heat map across all 14 pages. Shows build order, reuse percentages, and that homepage + division pages = 70% coverage.</p>
+        <p>The full 27-component heat map across all 14 pages. Homepage is complete (FC closed). Interior pages next.</p>
         <div class="hub-tile-meta">
           <span class="badge badge-jorge">Jorge</span>
         </div>
@@ -734,9 +734,10 @@
       <div class="hub-tile-body">
         <div class="hub-tile-num">Guide 06 &mdash; Housekeeping</div>
         <h3>Clean Up Duplicates</h3>
-        <p>Three sets of duplicate pages need to be resolved before the build &mdash; two "Late Model Stock Car" pages, two "Racing Overview" pages, two "FAQ" pages.</p>
+        <p>Racing Overview duplicates likely resolved (now Results + News). LMSC and FAQ duplicate status needs visual verification in Figma.</p>
         <div class="hub-tile-meta">
           <span class="badge badge-mayo">Mayo</span>
+          <span class="badge badge-updated">Partially Done</span>
         </div>
         <div class="hub-tile-cta">
           Jump to Guide
@@ -757,11 +758,11 @@
       Guide 01 &mdash; Assigned to Mayo
     </div>
     <h2 class="section-title">Rename Every Layer</h2>
-    <p class="section-desc">Almost every section in the Matthew file uses Figma's auto-generated names. The same name "Frame 602" appears on 9 different pages meaning something different each time. Claude Code cannot generate meaningful component filenames from these.</p>
+    <p class="section-desc">Mayo has renamed layers on most pages (Homepage, About, Results, News, Shop all at 100%). The Late Model Stock Car page is still at 20%, and Pro Truck + Modified pages don't exist yet. Below are the original rename maps showing what was done and what remains.</p>
   </div>
 
   <div class="callout callout-red">
-    <strong>Layer naming is the #1 priority.</strong> Well-named layers are the difference between Claude Code generating meaningful components and guessing at "Frame 491." The Homepage is largely done &mdash; division pages still need attention.
+    <strong>Layer naming is the #1 priority.</strong> Homepage, About, Results, News, and Shop are done. The Late Model Stock Car page (20%) and the two missing division pages (Pro Truck, Modified) are where the remaining work lives.
   </div>
 
   <div class="content-block card">
@@ -781,21 +782,24 @@
 
   <div class="content-block card">
     <div class="card-body">
-      <h3>Homepage Rename Map</h3>
+      <h3>Homepage Rename Map <span style="color:var(--accent-green); font-size:0.7rem; font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-left:0.5rem">Done</span></h3>
+      <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem">Mayo completed these renames. Current Figma layer names confirmed via MCP.</p>
       <table class="rename-table">
-        <thead><tr><th>Current Name</th><th>What It Is</th><th>Rename To</th></tr></thead>
+        <thead><tr><th>Figma Layer Name</th><th>What It Is</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td class="old-name">Frame 491</td><td class="what-is">Hero section with Matthew's name + video background</td><td class="new-name">hero-home</td></tr>
-          <tr><td class="old-name">Group 470</td><td class="what-is">Navigation bar area</td><td class="new-name">navbar-wrapper</td></tr>
-          <tr><td class="old-name">Frame 604</td><td class="what-is">"14 years old, four divisions" stats section</td><td class="new-name">stats-banner</td></tr>
-          <tr><td class="old-name">Frame 602</td><td class="what-is">Four divisions carousel (Pro Truck, LMSC, etc.)</td><td class="new-name">divisions-carousel</td></tr>
-          <tr><td class="old-name">Frame 605</td><td class="what-is">"Latest Results & Recaps" section</td><td class="new-name">results-recaps</td></tr>
-          <tr><td class="old-name">Frame 596</td><td class="what-is">"Meet Matthew" bio section with photo carousel</td><td class="new-name">meet-matthew</td></tr>
-          <tr><td class="old-name">Group 483</td><td class="what-is">"Get the Gear" merch section</td><td class="new-name">merch-gear</td></tr>
-          <tr><td class="old-name">Frame 595</td><td class="what-is">"From the Track" social feed</td><td class="new-name">social-feed</td></tr>
-          <tr><td class="old-name">Frame 594</td><td class="what-is">"Racing for a Cause" charity section</td><td class="new-name">charity-section</td></tr>
-          <tr><td class="old-name">Frame 597</td><td class="what-is">"Our Sponsors" logo row</td><td class="new-name">sponsors-row</td></tr>
-          <tr><td class="old-name">Frame 601</td><td class="what-is">"Upcoming Races" schedule preview</td><td class="new-name">upcoming-races</td></tr>
+          <tr><td class="new-name">Hero-Home</td><td class="what-is">Hero section with Matthew's name + video background</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">Main Nav Bar</td><td class="what-is">Navigation bar (component instance)</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">intro-home</td><td class="what-is">Intro / stats section</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">divisions-carousel-section</td><td class="what-is">Four divisions carousel (component)</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">results-recaps</td><td class="what-is">"Latest Results & Recaps" section</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">meet-matthew</td><td class="what-is">"Meet Matthew" bio section</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">merch-gear</td><td class="what-is">"Get the Gear" merch section</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">social-feed</td><td class="what-is">"From the Track" social feed (component)</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">charity-section</td><td class="what-is">"Racing for a Cause" charity section</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">sponsors-section</td><td class="what-is">"Our Sponsors" logo row</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">logo-scrolling-marquee</td><td class="what-is">Scrolling logo marquee</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="old-name">Frame 593</td><td class="what-is">Unknown &mdash; small frame</td><td style="color:var(--accent-orange)">Needs rename</td></tr>
+          <tr><td class="new-name">Footer Component</td><td class="what-is">Footer (component instance)</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
         </tbody>
       </table>
     </div>
@@ -803,17 +807,19 @@
 
   <div class="content-block card">
     <div class="card-body">
-      <h3>About Page Rename Map</h3>
+      <h3>About Page Rename Map <span style="color:var(--accent-green); font-size:0.7rem; font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-left:0.5rem">Done</span></h3>
+      <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem">Mayo completed these renames. 10/10 top-level layers properly named.</p>
       <table class="rename-table">
-        <thead><tr><th>Current Name</th><th>What It Is</th><th>Rename To</th></tr></thead>
+        <thead><tr><th>Figma Layer Name</th><th>What It Is</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td class="old-name">Frame 491</td><td class="what-is">Hero &mdash; "About Matthew"</td><td class="new-name">hero-about</td></tr>
-          <tr><td class="old-name">Frame 596</td><td class="what-is">"Meet Matthew Laprade" bio block</td><td class="new-name">bio-intro</td></tr>
-          <tr><td class="old-name">Frame 606</td><td class="what-is">"Matthew's Story" narrative</td><td class="new-name">story-narrative</td></tr>
-          <tr><td class="old-name">Frame 605</td><td class="what-is">"Career Highlights" list</td><td class="new-name">career-highlights</td></tr>
-          <tr><td class="old-name">Frame 602</td><td class="what-is">"2026 Season" summary</td><td class="new-name">season-current</td></tr>
-          <tr><td class="old-name">Frame 607</td><td class="what-is">"Matthew's Teams" with logos</td><td class="new-name">teams-list</td></tr>
-          <tr><td class="old-name">Frame 608</td><td class="what-is">"Off the Track" personal section</td><td class="new-name">off-track</td></tr>
+          <tr><td class="new-name">hero-about</td><td class="what-is">Hero &mdash; "About Matthew" (component)</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">meet-matthew-intro</td><td class="what-is">"Meet Matthew Laprade" bio block</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">matthew-story</td><td class="what-is">"Matthew's Story" narrative</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">career-highlights</td><td class="what-is">"Career Highlights" list</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">2026-section</td><td class="what-is">"2026 Season" summary</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">matthews-teams</td><td class="what-is">"Matthew's Teams" with logos</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">matthews-words</td><td class="what-is">"In Matthew's Words" section</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
+          <tr><td class="new-name">social-feed</td><td class="what-is">Social feed (component instance)</td><td><strong style="color:var(--accent-green)">Renamed</strong></td></tr>
         </tbody>
       </table>
     </div>
@@ -821,8 +827,8 @@
 
   <div class="content-block card">
     <div class="card-body">
-      <h3>Division Pages Rename Map</h3>
-      <p>Pro Truck, Modified, and LMSC share the same section structure:</p>
+      <h3>Division Pages Rename Map <span style="color:var(--accent-orange); font-size:0.7rem; font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-left:0.5rem">In Progress</span></h3>
+      <p>Late Model Stock Car is at 20% (8 of 10 layers still "Frame NNN"). Pro Truck and Modified pages <strong style="color:var(--accent-red)">do not exist yet</strong>.</p>
       <table class="rename-table">
         <thead><tr><th>Current Name</th><th>What It Is</th><th>Rename To</th></tr></thead>
         <tbody>
@@ -863,7 +869,7 @@
   </div>
 
   <div class="callout callout-green">
-    <strong>Time estimate:</strong> ~2 hours for the full file. Homepage and About are largely done. Focus remaining time on LMSC, Pro Truck, and Modified division pages.
+    <strong>Remaining work:</strong> Homepage, About, Results, News, and Shop are done. Late Model Stock Car needs a full naming pass (20%). Pro Truck and Modified pages need to be <strong>created first</strong> &mdash; they don't exist in the file yet.
   </div>
 </section>
 
@@ -1212,15 +1218,15 @@
   <div class="content-block card">
     <div class="card-body">
       <h3>Build Order &amp; Coverage Heat Map</h3>
-      <p>After building the homepage + division pages, <strong style="color:var(--accent-green)">~70% of all components are done.</strong> The remaining pages are mostly assembly.</p>
+      <p>Homepage is complete (FC closed, v0.14.0). With division pages next, <strong style="color:var(--accent-green)">~82% of all components will be done.</strong> The remaining pages are mostly assembly.</p>
       <table class="heat-table">
         <thead><tr><th>Page</th><th>Total Sections</th><th>Already Built</th><th>New Needed</th></tr></thead>
         <tbody>
-          <tr><td><strong>Homepage</strong></td><td class="num">12</td><td class="num-green">&mdash;</td><td class="num-orange">12 (build first)</td></tr>
+          <tr><td><strong>Homepage</strong></td><td class="num">10</td><td class="num-green">10</td><td class="num-green">0 (FC closed)</td></tr>
           <tr><td><strong>Pro Truck</strong></td><td class="num">10</td><td class="num-green">4</td><td class="num-orange">6</td></tr>
           <tr><td>Modified</td><td class="num">10</td><td class="num-green">10</td><td class="num-orange">0 (same as Pro Truck)</td></tr>
           <tr><td>LMSC</td><td class="num">10</td><td class="num-green">10</td><td class="num-orange">0 (same as Pro Truck)</td></tr>
-          <tr><td>About</td><td class="num">8</td><td class="num-green">3</td><td class="num-orange">5</td></tr>
+          <tr><td>About</td><td class="num">8</td><td class="num-green">6</td><td class="num-orange">2</td></tr>
           <tr><td>Sponsorship</td><td class="num">6</td><td class="num-green">3</td><td class="num-orange">3</td></tr>
           <tr><td>Article</td><td class="num">8</td><td class="num-green">3</td><td class="num-orange">5</td></tr>
           <tr><td>Press Kit</td><td class="num">6</td><td class="num-green">3</td><td class="num-orange">3</td></tr>
