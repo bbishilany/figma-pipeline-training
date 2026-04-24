@@ -1,0 +1,25 @@
+{
+  "_comment": "Proposed status.json schema for Jorge — place at repo root (Matthew-Laprade/status.json). Dashboard fetches this on load to auto-update key metrics.",
+  "version": "0.18.0",
+  "generated_at": "2026-04-23T21:00:00Z",
+  "components": { "built": 16, "total": 18 },
+  "acf": { "total": 19 },
+  "templates": { "built": 2, "total": 5 },
+  "fc_layouts": 12,
+  "pages": {
+    "home": { "pct": 100, "status": "live" },
+    "about": { "pct": 90, "status": "live" },
+    "racing": { "pct": 85, "status": "live" },
+    "results": { "pct": 25, "status": "wip" },
+    "divisions": { "pct": 20, "status": "blocked" },
+    "news": { "pct": 5, "status": "parked" },
+    "shop": { "pct": 30, "status": "wip" },
+    "sponsors": { "pct": 10, "status": "wip" },
+    "sponsorship": { "pct": 10, "status": "wip" },
+    "schedule": { "pct": 10, "status": "wip" },
+    "contact": { "pct": 5, "status": "wip" },
+    "faq": { "pct": 5, "status": "wip" },
+    "gallery": { "pct": 5, "status": "wip" },
+    "media-kit": { "pct": 5, "status": "wip" }
+  }
+}
