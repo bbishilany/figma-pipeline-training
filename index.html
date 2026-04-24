@@ -556,6 +556,35 @@
     .animate-in.visible { opacity: 1; transform: translateY(0); }
 
     /* ===== RESPONSIVE ===== */
+    /* ===== LIVE FEED INDICATOR ===== */
+    .feed-indicator {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.25rem 0.75rem; border-radius: var(--radius-pill);
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase; margin-left: 0.75rem;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .feed-dot {
+      width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+    }
+    .feed-dot.dot-checking { background: var(--text-muted); }
+    .feed-dot.dot-live { background: var(--accent-green); box-shadow: 0 0 6px rgba(16,185,129,0.5); }
+    .feed-dot.dot-offline { background: var(--accent-red); box-shadow: 0 0 6px rgba(239,68,68,0.4); }
+    .feed-indicator .feed-text { color: var(--text-muted); }
+    .feed-indicator.feed-live { border-color: rgba(16,185,129,0.3); }
+    .feed-indicator.feed-live .feed-text { color: var(--accent-green); }
+    .feed-indicator.feed-offline { border-color: rgba(239,68,68,0.2); }
+    .feed-indicator.feed-offline .feed-text { color: var(--accent-red); }
+    .feed-refresh {
+      background: none; border: none; cursor: pointer; padding: 0; margin-left: 0.3rem;
+      color: var(--text-muted); display: inline-flex; align-items: center; transition: var(--transition);
+    }
+    .feed-refresh:hover { color: var(--accent-blue); }
+    .feed-refresh svg { width: 12px; height: 12px; }
+    .feed-refresh.spinning svg { animation: spin 0.8s linear infinite; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
     @media (max-width: 700px) {
       .hub-grid { grid-template-columns: 1fr; }
       .inventory-table { font-size: 0.65rem; }
@@ -745,11 +774,11 @@
 
     <div class="card hub-tile tile-orange" onclick="document.getElementById('guide-5').scrollIntoView({behavior:'smooth'})">
       <div class="hub-tile-body">
-        <span class="hub-tile-pct pct-high">82%</span>
+        <span class="hub-tile-pct pct-high">88%</span>
         <div class="hub-tile-num">Guide 05 &mdash; Build Reference</div>
         <h3>Component Inventory</h3>
-        <p>14 of 17 components coded. Homepage FC closed. Interior pages next &mdash; blocked on page-standard.php template.</p>
-        <div class="hub-tile-progress"><div class="hub-tile-progress-fill fill-high" style="width:82%"></div></div>
+        <p>16 of ~18 buildable components coded. 19 ACF groups, 2 templates, 12 FC layouts. About + Racing pages live.</p>
+        <div class="hub-tile-progress"><div class="hub-tile-progress-fill fill-high" style="width:88%"></div></div>
         <div class="hub-tile-meta">
           <span class="badge badge-jorge">Jorge</span>
           <span class="badge badge-updated">In Progress</span>
@@ -1251,7 +1280,7 @@
   <div class="content-block card">
     <div class="card-body">
       <h3>Build Order &amp; Coverage Heat Map</h3>
-      <p>Homepage is complete (FC closed, v0.14.0). With division pages next, <strong style="color:var(--accent-green)">~82% of all components will be done.</strong> The remaining pages are mostly assembly.</p>
+      <p>Homepage is complete (FC closed). About + Racing pages live (v0.18.0). <strong style="color:var(--accent-green)">~88% of all components are built.</strong> The remaining pages are mostly assembly.</p>
       <table class="heat-table">
         <thead><tr><th>Page</th><th>Total Sections</th><th>Already Built</th><th>New Needed</th></tr></thead>
         <tbody>
@@ -1481,8 +1510,16 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20M5 20V8l7-5 7 5v12"/><path d="M9 20v-5h6v5"/></svg>
       Site Build Progress
     </div>
-    <h2 class="section-title">Figma &rarr; Code &mdash; Page-by-Page Build Status</h2>
-    <p class="section-desc">Cross-references the Figma design file against the <a href="https://github.com/Mileage-Design/Matthew-Laprade" target="_blank" style="color:var(--accent-blue);text-decoration:underline">GitHub repository</a> to track which designed pages have been built into the WordPress theme. Theme version <strong>0.14.0</strong>.</p>
+    <h2 class="section-title">Figma &rarr; Code &mdash; Page-by-Page Build Status
+      <span id="feed-indicator" class="feed-indicator">
+        <span class="feed-dot dot-checking"></span>
+        <span class="feed-text">Checking feed&hellip;</span>
+        <button class="feed-refresh" onclick="fetchStatusJson()" title="Refresh feed">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+        </button>
+      </span>
+    </h2>
+    <p class="section-desc">Cross-references the Figma design file against the <a href="https://github.com/Mileage-Design/Matthew-Laprade" target="_blank" style="color:var(--accent-blue);text-decoration:underline">GitHub repository</a> to track which designed pages have been built into the WordPress theme. Theme version <strong data-status-key="version">0.18.0</strong>.</p>
     <div style="margin-top:0.75rem"><span class="update-date">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
       Last updated: April 23, 2026
@@ -1496,23 +1533,23 @@
       <div style="margin-top:0.5rem">
         <div class="progress-row">
           <span class="progress-label">Site Build (All Pages)</span>
-          <div class="progress-track"><div class="progress-fill low" style="width:15%"></div></div>
-          <span class="progress-pct">~15% <span style="font-size:0.7rem; color:var(--text-muted)">(1 of 13+ pages)</span></span>
+          <div class="progress-track"><div class="progress-fill low" style="width:25%"></div></div>
+          <span class="progress-pct" data-status-key="pages._summary">~25% <span style="font-size:0.7rem; color:var(--text-muted)">(3 of ~12 pages live)</span></span>
         </div>
         <div class="progress-row">
           <span class="progress-label">Components Coded</span>
-          <div class="progress-track"><div class="progress-fill high" style="width:82%"></div></div>
-          <span class="progress-pct">14 / 17</span>
+          <div class="progress-track"><div class="progress-fill high" style="width:89%"></div></div>
+          <span class="progress-pct" data-status-key="components.built">16 / 18</span>
         </div>
         <div class="progress-row">
           <span class="progress-label">ACF Field Groups</span>
           <div class="progress-track"><div class="progress-fill high" style="width:100%"></div></div>
-          <span class="progress-pct">15 total</span>
+          <span class="progress-pct" data-status-key="acf.total">19 total</span>
         </div>
         <div class="progress-row">
           <span class="progress-label">Page Templates</span>
-          <div class="progress-track"><div class="progress-fill minimal" style="width:17%"></div></div>
-          <span class="progress-pct">1 / 6</span>
+          <div class="progress-track"><div class="progress-fill low" style="width:40%"></div></div>
+          <span class="progress-pct" data-status-key="templates.built">2 / 5</span>
         </div>
       </div>
     </div>
@@ -1534,21 +1571,21 @@
           <div class="build-detail-row"><span class="build-detail-label">ACF Group</span><span class="build-detail-value val-done">group_homepage.json</span></div>
           <div class="build-detail-row"><span class="build-detail-label">Components Built</span><span class="build-detail-value val-done">10 / 10 sections wired</span></div>
           <div class="build-detail-row"><span class="build-detail-label">FC Router</span><span class="build-detail-value val-done">All layouts wired end-to-end</span></div>
-          <div class="build-detail-row"><span class="build-detail-label">Version</span><span class="build-detail-value val-done">v0.14.0 &mdash; April 23</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Version</span><span class="build-detail-value val-done">v0.18.0 &mdash; April 23</span></div>
           <div class="build-page-note">Homepage functional complete. All 10 sections built and routed. data-table component covers upcoming-races. Sponsors marquee live. QA + polish remaining.</div>
         </div>
 
         <!-- About -->
-        <div class="build-page-card card-low">
+        <div class="build-page-card card-high">
           <div class="build-page-header">
-            <h4>About</h4>
-            <span class="build-pct-badge pct-low">35%</span>
+            <h4>About <span style="color:var(--accent-green); font-size:0.7rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-left:0.5rem; background:rgba(16,185,129,0.15); padding:0.15rem 0.5rem; border-radius:var(--radius-pill);">LIVE</span></h4>
+            <span class="build-pct-badge pct-high" data-status-key="pages.about.pct">90%</span>
           </div>
-          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-missing">page-standard.php &mdash; NOT BUILT</span></div>
-          <div class="build-detail-row"><span class="build-detail-label">ACF Group</span><span class="build-detail-value val-missing">Needs group_standard_page.json</span></div>
-          <div class="build-detail-row"><span class="build-detail-label">Components Built</span><span class="build-detail-value val-done">6 / 6</span></div>
-          <div class="build-detail-row"><span class="build-detail-label">Blocker</span><span class="build-detail-value val-missing">Standard Page template</span></div>
-          <div class="build-page-note">All needed component PHP files exist (hero, section-intro, overlay-text, feature-block, cta-banner, product-showcase). Blocked entirely on the Standard Page template + ACF group.</div>
+          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-done">standard-page.php</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">ACF Group</span><span class="build-detail-value val-done">group_standard_page.json</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">FC Sections</span><span class="build-detail-value val-done">9 sections wired</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Status</span><span class="build-detail-value val-done" data-status-key="pages.about.status">Live &mdash; QA remaining</span></div>
+          <div class="build-page-note">Page is live with 9 FC sections via standard-page.php + shared FC dispatcher. Mobile responsive. QA pass needed vs Figma design.</div>
         </div>
 
         <!-- Results -->
@@ -1605,55 +1642,59 @@
           <div class="build-page-note">Infrastructure stubs in place. No styled WooCommerce template overrides, no cart icon in nav, no payment gateway configured.</div>
         </div>
 
-        <!-- New Pages (Overnight) -->
-        <div class="build-page-card card-minimal">
+        <!-- Racing Overview -->
+        <div class="build-page-card card-high">
           <div class="build-page-header">
-            <h4>Racing Overview</h4>
-            <span class="build-pct-badge pct-minimal">5%</span>
+            <h4>Racing Overview <span style="color:var(--accent-green); font-size:0.7rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-left:0.5rem; background:rgba(16,185,129,0.15); padding:0.15rem 0.5rem; border-radius:var(--radius-pill);">LIVE</span></h4>
+            <span class="build-pct-badge pct-high" data-status-key="pages.racing.pct">85%</span>
           </div>
-          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-missing">page-standard.php &mdash; NOT BUILT</span></div>
-          <div class="build-detail-row"><span class="build-detail-label">Figma Naming</span><span class="build-detail-value val-done">100%</span></div>
-          <div class="build-page-note">New overnight. Figma layers fully named. Blocked on standard page template.</div>
+          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-done">standard-page.php</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">FC Sections</span><span class="build-detail-value val-done">4 sections wired</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Status</span><span class="build-detail-value val-done" data-status-key="pages.racing.status">Live &mdash; QA remaining</span></div>
+          <div class="build-page-note">Page is live with 4 FC sections via standard-page.php. Mobile responsive. QA pass needed vs Figma design.</div>
         </div>
 
         <div class="build-page-card card-minimal">
           <div class="build-page-header">
             <h4>Sponsors</h4>
-            <span class="build-pct-badge pct-minimal">5%</span>
+            <span class="build-pct-badge pct-minimal" data-status-key="pages.sponsors.pct">10%</span>
           </div>
-          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-missing">page-standard.php &mdash; NOT BUILT</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-done">standard-page.php exists</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Content</span><span class="build-detail-value val-missing">Not wired &mdash; needs sponsors-grid component</span></div>
           <div class="build-detail-row"><span class="build-detail-label">Figma Naming</span><span class="build-detail-value val-done">100%</span></div>
-          <div class="build-page-note">New overnight. Figma layers fully named. Needs sponsors-grid component.</div>
+          <div class="build-page-note">Template exists now. Content wiring and sponsors-grid component still needed.</div>
         </div>
 
         <div class="build-page-card card-minimal">
           <div class="build-page-header">
             <h4>Sponsorship</h4>
-            <span class="build-pct-badge pct-minimal">5%</span>
+            <span class="build-pct-badge pct-minimal" data-status-key="pages.sponsorship.pct">10%</span>
           </div>
-          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-missing">page-standard.php &mdash; NOT BUILT</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-done">standard-page.php exists</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Content</span><span class="build-detail-value val-missing">Not wired &mdash; needs content + tier layout</span></div>
           <div class="build-detail-row"><span class="build-detail-label">Figma Naming</span><span class="build-detail-value val-done">90%</span></div>
-          <div class="build-page-note">New overnight. Sponsorship packages / tiers page. Blocked on standard page template.</div>
+          <div class="build-page-note">Template exists now. Sponsorship tiers / packages page needs content wiring.</div>
         </div>
 
         <div class="build-page-card card-minimal">
           <div class="build-page-header">
             <h4>Race Schedule</h4>
-            <span class="build-pct-badge pct-minimal">5%</span>
+            <span class="build-pct-badge pct-minimal" data-status-key="pages.schedule.pct">10%</span>
           </div>
-          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-missing">page-standard.php &mdash; NOT BUILT</span></div>
-          <div class="build-detail-row"><span class="build-detail-label">Figma Naming</span><span class="build-detail-value val-done">80%</span></div>
-          <div class="build-page-note">New overnight. Can likely reuse data-table component for schedule grid.</div>
+          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-done">standard-page.php exists</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Content</span><span class="build-detail-value val-missing">Not wired &mdash; can reuse data-table component</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Figma Naming</span><span class="build-detail-value val-done">100%</span></div>
+          <div class="build-page-note">Template exists now. Schedule grid can reuse data-table component.</div>
         </div>
 
-        <div class="build-page-card card-parked">
+        <div class="build-page-card card-minimal">
           <div class="build-page-header">
             <h4>Contact / FAQ / Gallery / Media Kit</h4>
-            <span class="build-pct-badge pct-parked">0%</span>
+            <span class="build-pct-badge pct-minimal">5%</span>
           </div>
-          <div class="build-detail-row"><span class="build-detail-label">Figma</span><span class="build-detail-value val-partial">Designed but not yet inspected in detail</span></div>
-          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-missing">page-standard.php &mdash; NOT BUILT</span></div>
-          <div class="build-page-note">5 additional pages discovered in Mayo's overnight work. Designed frames exist but have not been inspected for layer naming yet. All blocked on standard page template.</div>
+          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-done">standard-page.php exists</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Content</span><span class="build-detail-value val-missing">Not wired &mdash; Figma designs exist but not inspected</span></div>
+          <div class="build-page-note">Template exists now. Designed frames exist but have not been content-wired yet.</div>
         </div>
 
       </div>
@@ -1685,6 +1726,9 @@
           <tr><td class="xref-name">chevron decoration</td><td>parts/components/decorations/chevron.php</td><td>group_component_decorations.json</td><td class="xref-done">Built</td></tr>
           <tr><td class="xref-name">upcoming-races</td><td>parts/components/data-table.php</td><td>group_component_data_table.json</td><td class="xref-done">Built (generic)</td></tr>
           <tr><td class="xref-name">stats-table</td><td>parts/components/data-table.php</td><td>group_component_data_table.json</td><td class="xref-done">Built (generic)</td></tr>
+          <tr><td class="xref-name">spec-card</td><td>parts/components/spec-card.php</td><td>group_component_spec_card.json</td><td class="xref-done">Built</td></tr>
+          <tr><td class="xref-name">feature-list</td><td>parts/components/feature-list.php</td><td>group_component_feature_list.json</td><td class="xref-done">Built</td></tr>
+          <tr><td class="xref-name">divisions-specs</td><td>parts/components/divisions-specs.php</td><td>group_component_divisions_specs.json</td><td class="xref-done">Built</td></tr>
           <tr><td class="xref-name">sponsors-grid</td><td>&mdash;</td><td>&mdash;</td><td class="xref-missing">Not started</td></tr>
           <tr><td class="xref-name">key-tracks-list</td><td>&mdash;</td><td>&mdash;</td><td class="xref-missing">Not started</td></tr>
           <tr><td class="xref-name">back-to-overview-cta</td><td>&mdash;</td><td>&mdash;</td><td class="xref-missing">Not started</td></tr>
@@ -1732,8 +1776,12 @@
           <div><div class="infra-label">WooCommerce</div><div class="infra-sub">Hooks + single-product override; no styled archive</div></div>
         </div>
         <div class="infra-chip">
-          <span class="infra-dot dot-red"></span>
-          <div><div class="infra-label">Standard Page Template</div><div class="infra-sub">Not built &mdash; blocks 8+ pages</div></div>
+          <span class="infra-dot dot-green"></span>
+          <div><div class="infra-label">Standard Page Template</div><div class="infra-sub">Built &mdash; standard-page.php</div></div>
+        </div>
+        <div class="infra-chip">
+          <span class="infra-dot dot-green"></span>
+          <div><div class="infra-label">FC Renderer</div><div class="infra-sub">Shared dispatcher &mdash; routes all FC layouts</div></div>
         </div>
         <div class="infra-chip">
           <span class="infra-dot dot-red"></span>
@@ -1748,13 +1796,11 @@
     <div class="card-body">
       <h3>Build Priority Queue</h3>
       <ol class="priority-list">
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build page-standard.php template + ACF group</strong> &mdash; unblocks About, Results, Sponsorship, Contact, Race Schedule, FAQ, Racing, Sponsors (8+ pages)</div><div class="pri-ref">Immediate &mdash; highest-leverage item</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build single-racing_division.php template</strong> &mdash; unblocks all 4 division pages (LMSC, Pro Truck, Modified, Sportsman)</div><div class="pri-ref">Immediate &mdash; after page-standard</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build sponsors-grid component</strong> &mdash; needed on division pages and sponsors overview</div><div class="pri-ref">High &mdash; PHP + ACF field group</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build key-tracks-list component</strong> &mdash; needed on all division pages</div><div class="pri-ref">High</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Interior page builds</strong> &mdash; About first (all components exist), then Results, Sponsorship</div><div class="pri-ref">Medium &mdash; unblocked once page-standard.php exists</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>WooCommerce template overrides</strong> &mdash; styled archive, cart; single-product override exists</div><div class="pri-ref">Medium &mdash; pending client payment gateway decision</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Blog templates</strong> &mdash; archive + single.php</div><div class="pri-ref">Deferred &mdash; parked pending Figma designs</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build single-racing_division.php template</strong> &mdash; blocks all 4 division pages (LMSC, Pro Truck, Modified, Sportsman)</div><div class="pri-ref">Active #1 &mdash; highest-leverage remaining item</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build Sponsorship page content</strong> &mdash; wire tier layout and content into standard-page.php</div><div class="pri-ref">Active #2 &mdash; template exists, needs content wiring</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build remaining components</strong> &mdash; sponsors-grid, key-tracks-list (2 of 18 not started)</div><div class="pri-ref">Active #3 &mdash; needed for division + sponsors pages</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Contact page build</strong> &mdash; template exists, needs contact-form component + content wiring</div><div class="pri-ref">Queued &mdash; unblocked</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>WooCommerce template overrides</strong> &mdash; styled archive, cart; single-product override exists</div><div class="pri-ref">Queued &mdash; pending client payment gateway decision</div></div></li>
       </ol>
     </div>
   </div>
@@ -1780,11 +1826,11 @@
       <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-top:0.75rem">
         <div style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); border-radius:var(--radius-card); padding:1rem">
           <div style="font-size:0.7rem; color:var(--accent-green); text-transform:uppercase; letter-spacing:1px; font-weight:600; margin-bottom:0.25rem">Completed</div>
-          <div style="font-size:0.9rem">Homepage FC closed (v0.14.0). 13 components + 1 decoration partial. 15 ACF field groups. 3 CPTs (racing_division, sponsor, race). 21 design frames in Figma &mdash; 10 of 13 inspected pages at 90%+ naming.</div>
+          <div style="font-size:0.9rem">Homepage FC closed. About page LIVE (9 FC sections). Racing page LIVE (4 FC sections). standard-page.php built + shared FC dispatcher. 3 new components (spec-card, feature-list, divisions-specs). 16 components + 1 decoration partial. 19 ACF field groups. Mobile polish pass complete. Theme v0.18.0.</div>
         </div>
         <div style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.2); border-radius:var(--radius-card); padding:1rem">
           <div style="font-size:0.7rem; color:var(--accent-red); text-transform:uppercase; letter-spacing:1px; font-weight:600; margin-bottom:0.25rem">Blockers</div>
-          <div style="font-size:0.9rem">page-standard.php not built (blocks 8+ interior pages). single-racing_division.php not built (blocks 4 division pages). Copy-paste errors on Modified + Sportsman breadcrumbs. LMSC/Modified/Sportsman layers need naming.</div>
+          <div style="font-size:0.9rem">single-racing_division.php not built (blocks 4 division pages). Copy-paste errors on Modified + Sportsman breadcrumbs. LMSC/Modified/Sportsman layers need naming.</div>
         </div>
       </div>
     </div>
@@ -1809,16 +1855,16 @@
   <div class="content-block card">
     <div class="card-body">
       <h3>Jorge (WordPress Developer) &mdash; Priority Order</h3>
-      <ol class="priority-list">
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build page-standard.php + ACF group</strong> &mdash; unblocks About, Results, Sponsorship, Contact, Race Schedule, FAQ, Racing, Sponsors &mdash; 8+ pages waiting</div><div class="pri-ref">Immediate &mdash; highest-leverage item</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build single-racing_division.php template</strong> &mdash; unblocks all 4 division pages (LMSC, Pro Truck, Modified, Sportsman)</div><div class="pri-ref">Immediate &mdash; after page-standard</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build About page</strong> &mdash; all 6 components already exist (hero, section-intro, overlay-text, feature-block, cta-banner, product-showcase). Pure assembly.</div><div class="pri-ref">High &mdash; first interior page build once template exists</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build sponsors-grid + key-tracks-list components</strong> &mdash; needed for division pages and sponsors overview</div><div class="pri-ref">High &mdash; 3 remaining components of 17</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>WooCommerce template overrides</strong> &mdash; styled archive, cart; single-product override exists</div><div class="pri-ref">Medium &mdash; pending client payment gateway decision</div></div></li>
-      </ol>
-      <div class="callout callout-green" style="margin-top:1rem">
-        <strong>What's going well:</strong> Homepage v0.14.0 FC closed with all 10 sections. data-table generic primitive replaces 3 separate spec entries. 4 new components shipped since baseline. Mayo's overnight work means Jorge now has 21 designed pages to work from &mdash; the Figma gap is closed.
+      <div class="callout callout-green" style="margin-top:0; margin-bottom:1rem">
+        <strong>Completed (v0.14.0 &rarr; v0.18.0):</strong> &#10003; standard-page.php built &mdash; &#10003; About page live (9 FC sections) &mdash; &#10003; Racing page live (4 FC sections) &mdash; &#10003; Mobile responsive polish &mdash; &#10003; 3 new components (spec-card, feature-list, divisions-specs) &mdash; &#10003; Shared FC dispatcher
       </div>
+      <ol class="priority-list">
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build single-racing_division.php template</strong> &mdash; blocks all 4 division pages (LMSC, Pro Truck, Modified, Sportsman)</div><div class="pri-ref">Active #1 &mdash; highest-leverage remaining item</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build Sponsorship page content</strong> &mdash; wire tier layout, packages, and CTA sections into standard-page.php</div><div class="pri-ref">Active #2 &mdash; template exists, needs content</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build remaining components (sponsors-grid, key-tracks-list)</strong> &mdash; 2 of 18 buildable components not started</div><div class="pri-ref">Active #3 &mdash; needed for division + sponsors pages</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Contact page build</strong> &mdash; needs contact-form component + content wiring</div><div class="pri-ref">Queued &mdash; unblocked</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>WooCommerce template overrides</strong> &mdash; styled archive, cart; single-product override exists</div><div class="pri-ref">Queued &mdash; pending client payment gateway decision</div></div></li>
+      </ol>
     </div>
   </div>
 
@@ -1826,9 +1872,10 @@
     <div class="card-body">
       <h3>Claude Code &mdash; Next Steps</h3>
       <ol class="priority-list">
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>QA the Homepage build</strong> &mdash; compare v0.14.0 against the Figma homepage design pixel-by-pixel via MCP screenshot</div><div class="pri-ref">Available now &mdash; Homepage FC is closed</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Assist with page-standard.php</strong> &mdash; can build the template + ACF group from the Figma About page via MCP</div><div class="pri-ref">When Jorge is ready</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Extract tokens for interior pages</strong> &mdash; design tokens are comprehensive, ready for automated extraction</div><div class="pri-ref">Ongoing &mdash; unblocked</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>QA About page</strong> &mdash; compare 9 live FC sections against Figma About page design via MCP screenshot</div><div class="pri-ref">Available now &mdash; page is live</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>QA Racing page</strong> &mdash; compare 4 live FC sections against Figma Racing Overview page via MCP screenshot</div><div class="pri-ref">Available now &mdash; page is live</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Assist with single-racing_division.php build</strong> &mdash; can scaffold the template + ACF fields from Figma division pages via MCP</div><div class="pri-ref">When Jorge is ready</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Extract tokens for Sponsorship + Contact pages</strong> &mdash; design tokens comprehensive, ready for automated extraction</div><div class="pri-ref">Ongoing &mdash; unblocked</div></div></li>
       </ol>
     </div>
   </div>
@@ -1865,6 +1912,77 @@ window.addEventListener('scroll', () => {
   navLinks.forEach(a => a.classList.remove('active'));
   if (current) current.link.classList.add('active');
 });
+
+// ===== STATUS.JSON LIVE FEED =====
+const STATUS_URL = 'https://raw.githubusercontent.com/Mileage-Design/Matthew-Laprade/main/status.json';
+
+function resolveKey(obj, path) {
+  return path.split('.').reduce((o, k) => (o && o[k] !== undefined ? o[k] : null), obj);
+}
+
+function updateFeedIndicator(state, version) {
+  const el = document.getElementById('feed-indicator');
+  const dot = el.querySelector('.feed-dot');
+  const text = el.querySelector('.feed-text');
+  el.className = 'feed-indicator';
+  dot.className = 'feed-dot';
+  if (state === 'live') {
+    el.classList.add('feed-live');
+    dot.classList.add('dot-live');
+    text.textContent = 'Live feed v' + (version || '?');
+  } else if (state === 'offline') {
+    el.classList.add('feed-offline');
+    dot.classList.add('dot-offline');
+    text.textContent = 'Feed offline \u2014 static values';
+  } else {
+    dot.classList.add('dot-checking');
+    text.textContent = 'Checking feed\u2026';
+  }
+  el.querySelector('.feed-refresh').classList.remove('spinning');
+}
+
+function applyStatusData(data) {
+  document.querySelectorAll('[data-status-key]').forEach(el => {
+    const key = el.getAttribute('data-status-key');
+    const val = resolveKey(data, key);
+    if (val === null) return;
+    // For percentage badges, update text content
+    if (key.endsWith('.pct')) {
+      el.textContent = val + '%';
+    } else if (key.endsWith('.status')) {
+      const statusMap = { live: 'Live', blocked: 'Blocked', parked: 'Parked', wip: 'In Progress' };
+      el.textContent = statusMap[val] || val;
+    } else if (key === 'version') {
+      el.textContent = val;
+    } else if (key === 'components.built') {
+      el.textContent = data.components.built + ' / ' + data.components.total;
+    } else if (key === 'acf.total') {
+      el.textContent = data.acf.total + ' total';
+    } else if (key === 'templates.built') {
+      el.textContent = data.templates.built + ' / ' + data.templates.total;
+    } else {
+      el.textContent = val;
+    }
+  });
+}
+
+function fetchStatusJson() {
+  const btn = document.querySelector('.feed-refresh');
+  btn.classList.add('spinning');
+  updateFeedIndicator('checking');
+  fetch(STATUS_URL, { cache: 'no-store' })
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(data => {
+      applyStatusData(data);
+      updateFeedIndicator('live', data.version);
+    })
+    .catch(() => {
+      updateFeedIndicator('offline');
+    });
+}
+
+// Run once on load
+fetchStatusJson();
 </script>
 
 </body>
