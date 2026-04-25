@@ -1519,7 +1519,7 @@
         </button>
       </span>
     </h2>
-    <p class="section-desc">Cross-references the Figma design file against the <a href="https://github.com/Mileage-Design/Matthew-Laprade" target="_blank" style="color:var(--accent-blue);text-decoration:underline">GitHub repository</a> to track which designed pages have been built into the WordPress theme. Theme version <strong data-status-key="version">0.18.0</strong>.</p>
+    <p class="section-desc">Cross-references the Figma design file against the <a href="https://github.com/Mileage-Design/Matthew-Laprade" target="_blank" style="color:var(--accent-blue);text-decoration:underline">GitHub repository</a> to track which designed pages have been built into the WordPress theme. Theme version <strong data-status-key="version">0.19.0</strong>.</p>
     <div style="margin-top:0.75rem"><span class="update-date">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
       Last updated: April 23, 2026
@@ -1533,8 +1533,8 @@
       <div style="margin-top:0.5rem">
         <div class="progress-row">
           <span class="progress-label">Site Build (All Pages)</span>
-          <div class="progress-track"><div class="progress-fill low" style="width:25%"></div></div>
-          <span class="progress-pct" data-status-key="pages._summary">~25% <span style="font-size:0.7rem; color:var(--text-muted)">(3 of ~12 pages live)</span></span>
+          <div class="progress-track"><div class="progress-fill mid" style="width:33%"></div></div>
+          <span class="progress-pct" data-status-key="pages._summary">~33% <span style="font-size:0.7rem; color:var(--text-muted)">(4 of ~12 pages live)</span></span>
         </div>
         <div class="progress-row">
           <span class="progress-label">Components Coded</span>
@@ -1571,7 +1571,7 @@
           <div class="build-detail-row"><span class="build-detail-label">ACF Group</span><span class="build-detail-value val-done">group_homepage.json</span></div>
           <div class="build-detail-row"><span class="build-detail-label">Components Built</span><span class="build-detail-value val-done">10 / 10 sections wired</span></div>
           <div class="build-detail-row"><span class="build-detail-label">FC Router</span><span class="build-detail-value val-done">All layouts wired end-to-end</span></div>
-          <div class="build-detail-row"><span class="build-detail-label">Version</span><span class="build-detail-value val-done">v0.18.0 &mdash; April 23</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Version</span><span class="build-detail-value val-done">v0.19.0 &mdash; April 24</span></div>
           <div class="build-page-note">Homepage functional complete. All 10 sections built and routed. data-table component covers upcoming-races. Sponsors marquee live. QA + polish remaining.</div>
         </div>
 
@@ -1654,15 +1654,16 @@
           <div class="build-page-note">Page is live with 4 FC sections via standard-page.php. Mobile responsive. QA pass needed vs Figma design.</div>
         </div>
 
-        <div class="build-page-card card-minimal">
+        <div class="build-page-card card-high">
           <div class="build-page-header">
-            <h4>Sponsors</h4>
-            <span class="build-pct-badge pct-minimal" data-status-key="pages.sponsors.pct">10%</span>
+            <h4>Sponsors <span style="color:var(--accent-green); font-size:0.7rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-left:0.5rem; background:rgba(16,185,129,0.15); padding:0.15rem 0.5rem; border-radius:var(--radius-pill);">LIVE</span></h4>
+            <span class="build-pct-badge pct-high" data-status-key="pages.sponsors.pct">85%</span>
           </div>
-          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-done">standard-page.php exists</span></div>
-          <div class="build-detail-row"><span class="build-detail-label">Content</span><span class="build-detail-value val-missing">Not wired &mdash; needs sponsors-grid component</span></div>
-          <div class="build-detail-row"><span class="build-detail-label">Figma Naming</span><span class="build-detail-value val-done">100%</span></div>
-          <div class="build-page-note">Template exists now. Content wiring and sponsors-grid component still needed.</div>
+          <div class="build-detail-row"><span class="build-detail-label">Template</span><span class="build-detail-value val-done">standard-page.php</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Content</span><span class="build-detail-value val-done">feature_list source=sponsors + section-intro split-lead</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Version</span><span class="build-detail-value val-done">v0.19.0 &mdash; April 24</span></div>
+          <div class="build-detail-row"><span class="build-detail-label">Status</span><span class="build-detail-value val-done" data-status-key="pages.sponsors.status">Live &mdash; QA remaining</span></div>
+          <div class="build-page-note">Page seeded (ID 355). feature_list logo-card variant for sponsor logos with per-row CTA. Shape-clipped hero with manually prepped background. Sponsor CPT toggle excludes charity beneficiaries from commercial list.</div>
         </div>
 
         <div class="build-page-card card-minimal">
@@ -1816,7 +1817,7 @@
       Schedule
     </div>
     <h2 class="section-title">Current Priorities &mdash; By Teammate</h2>
-    <p class="section-desc">Based on live Figma MCP inspection and GitHub repo analysis. Updated April 23, 2026.</p>
+    <p class="section-desc">Based on live Figma MCP inspection and GitHub repo analysis. Updated April 24, 2026.</p>
   </div>
 
   <!-- Status Summary -->
@@ -1826,7 +1827,7 @@
       <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-top:0.75rem">
         <div style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); border-radius:var(--radius-card); padding:1rem">
           <div style="font-size:0.7rem; color:var(--accent-green); text-transform:uppercase; letter-spacing:1px; font-weight:600; margin-bottom:0.25rem">Completed</div>
-          <div style="font-size:0.9rem">Homepage FC closed. About page LIVE (9 FC sections). Racing page LIVE (4 FC sections). standard-page.php built + shared FC dispatcher. 3 new components (spec-card, feature-list, divisions-specs). 16 components + 1 decoration partial. 19 ACF field groups. Mobile polish pass complete. Theme v0.18.0.</div>
+          <div style="font-size:0.9rem">Homepage FC closed. About LIVE (9 FC sections). Racing LIVE (4 FC sections). Sponsors LIVE (v0.19.0). standard-page.php + shared FC dispatcher. feature_list source=sponsors variant + section-intro split-lead layout. 16 components + 1 decoration partial. 19 ACF field groups. Mobile polish complete. Theme v0.19.0.</div>
         </div>
         <div style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.2); border-radius:var(--radius-card); padding:1rem">
           <div style="font-size:0.7rem; color:var(--accent-red); text-transform:uppercase; letter-spacing:1px; font-weight:600; margin-bottom:0.25rem">Blockers</div>
@@ -1856,7 +1857,7 @@
     <div class="card-body">
       <h3>Jorge (WordPress Developer) &mdash; Priority Order</h3>
       <div class="callout callout-green" style="margin-top:0; margin-bottom:1rem">
-        <strong>Completed (v0.14.0 &rarr; v0.18.0):</strong> &#10003; standard-page.php built &mdash; &#10003; About page live (9 FC sections) &mdash; &#10003; Racing page live (4 FC sections) &mdash; &#10003; Mobile responsive polish &mdash; &#10003; 3 new components (spec-card, feature-list, divisions-specs) &mdash; &#10003; Shared FC dispatcher
+        <strong>Completed (v0.14.0 &rarr; v0.19.0):</strong> &#10003; standard-page.php built &mdash; &#10003; About live (9 FC sections) &mdash; &#10003; Racing live (4 FC sections) &mdash; &#10003; Sponsors live (feature_list logo-card + split-lead intro) &mdash; &#10003; Mobile responsive polish &mdash; &#10003; 3 new components (spec-card, feature-list, divisions-specs) &mdash; &#10003; Shared FC dispatcher
       </div>
       <ol class="priority-list">
         <li><div class="pri-num"></div><div><div class="pri-text"><strong>Build single-racing_division.php template</strong> &mdash; blocks all 4 division pages (LMSC, Pro Truck, Modified, Sportsman)</div><div class="pri-ref">Active #1 &mdash; highest-leverage remaining item</div></div></li>
@@ -1874,8 +1875,8 @@
       <ol class="priority-list">
         <li><div class="pri-num"></div><div><div class="pri-text"><strong>QA About page</strong> &mdash; compare 9 live FC sections against Figma About page design via MCP screenshot</div><div class="pri-ref">Available now &mdash; page is live</div></div></li>
         <li><div class="pri-num"></div><div><div class="pri-text"><strong>QA Racing page</strong> &mdash; compare 4 live FC sections against Figma Racing Overview page via MCP screenshot</div><div class="pri-ref">Available now &mdash; page is live</div></div></li>
+        <li><div class="pri-num"></div><div><div class="pri-text"><strong>QA Sponsors page</strong> &mdash; verify feature_list logo-card variant, split-lead intro, shape-clipped hero vs Figma</div><div class="pri-ref">Available now &mdash; page is live (v0.19.0)</div></div></li>
         <li><div class="pri-num"></div><div><div class="pri-text"><strong>Assist with single-racing_division.php build</strong> &mdash; can scaffold the template + ACF fields from Figma division pages via MCP</div><div class="pri-ref">When Jorge is ready</div></div></li>
-        <li><div class="pri-num"></div><div><div class="pri-text"><strong>Extract tokens for Sponsorship + Contact pages</strong> &mdash; design tokens comprehensive, ready for automated extraction</div><div class="pri-ref">Ongoing &mdash; unblocked</div></div></li>
       </ol>
     </div>
   </div>
